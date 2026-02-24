@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Explorer — Complete Guide</title>
+<style>
+  @page { margin: 0.6in 0.7in; size: letter; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1a1a2e; line-height: 1.55; font-size: 10.5pt; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  h1 { font-size: 26pt; color: #0f172a; margin-bottom: 6px; }
+  h2 { font-size: 18pt; color: #1e293b; margin-top: 28px; margin-bottom: 10px; border-bottom: 2.5px solid #6366f1; padding-bottom: 4px; page-break-after: avoid; }
+  h3 { font-size: 13pt; color: #334155; margin-top: 14px; margin-bottom: 5px; page-break-after: avoid; }
+  h4 { font-size: 11pt; color: #475569; margin-top: 10px; margin-bottom: 4px; }
+  p { margin-bottom: 6px; }
+  .subtitle { font-size: 12pt; color: #64748b; margin-bottom: 18px; }
+  .toc { margin: 16px 0 24px 0; }
+  .toc a { display: block; padding: 3px 0; font-size: 11pt; }
+  .toc .toc-sub { padding-left: 20px; font-size: 10pt; }
+  .card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; page-break-inside: avoid; }
+  .card-title { font-weight: 700; font-size: 11pt; }
+  .card-tag { display: inline-block; font-size: 8pt; background: #f1f5f9; border-radius: 3px; padding: 1px 6px; margin-left: 6px; color: #64748b; }
+  .card-body { font-size: 10pt; color: #334155; margin-top: 3px; }
+  .badge { display: inline-block; font-size: 8pt; font-weight: 600; border-radius: 3px; padding: 1px 7px; color: #fff; margin-right: 5px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .mini { font-size: 9pt; color: #64748b; }
+  .kp { padding-left: 16px; margin: 2px 0; }
+  .kp::before { content: "• "; color: #6366f1; font-weight: bold; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; }
+  th { background: #f8fafc; text-align: left; padding: 5px 6px; border: 1px solid #e2e8f0; font-weight: 600; }
+  td { padding: 5px 6px; border: 1px solid #e2e8f0; vertical-align: top; }
+  .code-block { background: #1e293b; color: #e2e8f0; font-family: 'Menlo', 'Monaco', monospace; font-size: 8.5pt; padding: 8px 10px; border-radius: 5px; margin: 6px 0; white-space: pre-wrap; word-break: break-all; page-break-inside: avoid; }
+  .section-divider { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+  .page-break { page-break-before: always; }
+  .cover { text-align: center; padding: 120px 0 60px 0; }
+  .cover h1 { font-size: 36pt; color: #1e293b; }
+  .cover .tagline { font-size: 14pt; color: #64748b; margin-top: 10px; }
+  .footer-note { font-size: 8pt; color: #94a3b8; text-align: center; margin-top: 30px; }
+  .highlight-box { background: #f0f9ff; border-left: 3px solid #3b82f6; padding: 8px 10px; margin: 8px 0; border-radius: 0 4px 4px 0; font-size: 10pt; }
+  .pro { color: #16a34a; }
+  .con { color: #dc2626; }
+  ul { padding-left: 18px; margin: 4px 0; }
+  li { margin: 2px 0; font-size: 10pt; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ COVER ═══════════════════ -->
+<div class="cover">
+  <h1>AI Explorer</h1>
+  <div class="tagline">Understand AI from the Ground Up</div>
+  <p style="margin-top:12px;color:#94a3b8;font-size:10pt;">
+    A comprehensive guide to AI — from foundational concepts and LLM comparisons to<br>
+    real-world products, code editors, community resources, and hands-on building guides.
+  </p>
+  <p style="margin-top:30px;font-size:9pt;color:#94a3b8;">Generated February 2026 &middot; For educational purposes</p>
+</div>
+
+<!-- ═══════════════════ TABLE OF CONTENTS ═══════════════════ -->
+<div class="page-break"></div>
+<h2 style="border-color:#1e293b;">Table of Contents</h2>
+<div class="toc">
+  <a href="#concepts"><strong>1. AI Concepts</strong> — 25 foundational topics</a>
+  <a class="toc-sub" href="#c-ai">Artificial Intelligence, Machine Learning, Deep Learning, Generative AI, LLMs</a>
+  <a class="toc-sub" href="#c-cv">Computer Vision, NLP, Reinforcement Learning, AI Agents, MCP</a>
+  <a class="toc-sub" href="#c-rag">RAG, Fine-Tuning, Embeddings, Vector DBs, Prompt Engineering</a>
+  <a class="toc-sub" href="#c-transformers">Transformers, Transfer Learning, Diffusion Models, MLOps, Multimodal AI</a>
+  <a class="toc-sub" href="#c-federated">Federated Learning, Responsible AI, Knowledge Graphs, Synthetic Data, Edge AI</a>
+  <a href="#llm-rubric"><strong>2. LLM Model Rubric</strong> — 27 models compared</a>
+  <a href="#model-training"><strong>3. Model Training &amp; AI History</strong></a>
+  <a class="toc-sub" href="#timeline">AI Timeline (1950–2025)</a>
+  <a class="toc-sub" href="#training-tech">Training Technologies (10 techniques)</a>
+  <a class="toc-sub" href="#pros-cons">Pros &amp; Cons of LLMs</a>
+  <a class="toc-sub" href="#individual-training">Individual Fine-Tuning Guide</a>
+  <a href="#prompt-engineering"><strong>4. Prompt Engineering</strong> — 18 techniques</a>
+  <a href="#products"><strong>5. AI Products Explorer</strong> — 50 companies</a>
+  <a href="#ai-tools"><strong>6. AI Tools &amp; Protocols</strong></a>
+  <a class="toc-sub" href="#t-agents">AI Agents, MCP, APIs, API Keys, SDKs, Function Calling</a>
+  <a href="#code-assistants"><strong>7. Code Assistants &amp; AI Editors</strong> — 10 tools</a>
+  <a href="#resources"><strong>8. Resources &amp; Community</strong> — 30+ links</a>
+  <a href="#guides"><strong>9. Build Guides</strong> — 24 hands-on tutorials</a>
+</div>
+
+<!-- ═══════════════════ 1. AI CONCEPTS ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="concepts">1. AI Concepts</h2>
+<p>25 foundational AI topics — from the broadest concepts to specialized techniques.</p>
+
+<h3 id="c-ai">Artificial Intelligence (AI)</h3>
+<p>The broad field of building systems that can perform tasks requiring human-like intelligence — reasoning, learning, perception, and decision-making.</p>
+<div class="highlight-box"><strong>Key Insight:</strong> AI is the umbrella — everything else on this page is a subset of AI.</div>
+<p><strong>Examples:</strong> Virtual assistants, Self-driving cars, Spam filters, Recommendation engines</p>
+<p><strong>Types:</strong> Narrow AI (current — task-specific), General AI (theoretical — human-level), Superintelligent AI (hypothetical).</p>
+
+<h3>Machine Learning (ML)</h3>
+<p>A subset of AI where algorithms learn patterns from data to make predictions — without being explicitly programmed for each scenario.</p>
+<div class="highlight-box"><strong>Key Insight:</strong> Instead of writing rules, you give ML data and it finds the rules itself.</div>
+<p><strong>Three Types:</strong> Supervised Learning (labeled data), Unsupervised Learning (find hidden patterns), Semi/Self-supervised Learning (combination).</p>
+
+<h3>Deep Learning (DL)</h3>
+<p>A specialized subset of ML using multi-layered neural networks (often with billions of parameters) to learn complex patterns from massive datasets.</p>
+<div class="highlight-box"><strong>Key Insight:</strong> Deep learning powers most modern AI breakthroughs — it's the engine behind the AI revolution.</div>
+<p><strong>Key Terms:</strong> Neural Network, Parameters, Backpropagation, GPU, Transformer architecture.</p>
+
+<h3>Generative AI (GenAI)</h3>
+<p>AI systems that create new content — text, images, video, audio, and code — based on patterns learned from training data.</p>
+<div class="highlight-box"><strong>Key Insight:</strong> Traditional AI analyzes data. Generative AI creates new data. That's the paradigm shift.</div>
+<p><strong>Examples:</strong> ChatGPT writing essays, DALL-E creating images, Sora generating video, GitHub Copilot writing code.</p>
+
+<h3>Large Language Models (LLMs)</h3>
+<p>Deep learning models trained on massive text corpora that can understand and generate human language — the technology behind chatbots like ChatGPT and Claude.</p>
+<div class="highlight-box"><strong>Key Insight:</strong> LLMs don't just retrieve information — they reason, summarize, translate, and create.</div>
+<p><strong>Key Terms:</strong> Token, Context Window, Transformer, RLHF, Inference, Open vs Closed models.</p>
+
+<h3 id="c-cv">Computer Vision (CV)</h3>
+<p>AI that enables machines to interpret and extract meaningful information from images and video — from medical scans to autonomous driving.</p>
+<p><strong>Key architectures:</strong> CNNs, YOLO (object detection), Vision Transformers (ViT).</p>
+
+<h3>Natural Language Processing (NLP)</h3>
+<p>The branch of AI focused on enabling machines to understand, interpret, and generate human language — powering chatbots, translation, and search.</p>
+<p><strong>Core Tasks:</strong> Sentiment analysis, Named Entity Recognition, Translation, Summarization, Question Answering.</p>
+
+<h3>Reinforcement Learning (RL)</h3>
+<p>AI that learns through trial and error — an agent interacts with an environment, receiving rewards or penalties, to discover optimal strategies.</p>
+<p><strong>Key:</strong> RLHF (RL from Human Feedback) is the technique used to align ChatGPT and Claude with human preferences.</p>
+
+<h3>AI Agents</h3>
+<p>Autonomous AI systems that can plan, reason, use tools, and take multi-step actions to accomplish goals. Follow an agentic loop: Observe → Think → Act → Evaluate → Repeat.</p>
+<p><strong>Examples:</strong> Claude Code, AutoGPT, Devin, CrewAI multi-agent systems.</p>
+
+<h3>Model Context Protocol (MCP)</h3>
+<p>An open standard created by Anthropic that defines how AI applications communicate with external tools and data sources. One universal protocol — any AI app that supports MCP can connect to any MCP server.</p>
+<p><strong>Architecture:</strong> MCP Host (AI app) → MCP Client → MCP Server (exposes tools). Primitives: Tools, Resources, Prompts.</p>
+
+<h3 id="c-rag">Retrieval-Augmented Generation (RAG)</h3>
+<p>A technique that retrieves relevant documents from a knowledge base and feeds them to an LLM as context, enabling accurate answers grounded in specific data.</p>
+<p><strong>Pipeline:</strong> Split docs → Embed → Store in vector DB → Retrieve relevant chunks → Augment prompt → Generate answer.</p>
+
+<h3>Fine-Tuning</h3>
+<p>Adapting a pre-trained model to a specific task or domain by continuing training on a smaller, specialized dataset.</p>
+<p><strong>Methods:</strong> Full fine-tuning (expensive), LoRA (efficient, ~0.5% params), QLoRA (4-bit quantization + LoRA), API-based (no GPU needed).</p>
+
+<h3>Embeddings</h3>
+<p>Converting text, images, or other data into dense numerical vectors that capture semantic meaning. Similar items have similar embeddings.</p>
+<p><strong>Models:</strong> OpenAI text-embedding-3-small, Google text-embedding-004, nomic-embed-text (local).</p>
+
+<h3>Vector Databases</h3>
+<p>Specialized databases optimized for storing, indexing, and searching embedding vectors using similarity metrics like cosine similarity.</p>
+<p><strong>Examples:</strong> Pinecone, Weaviate, Chroma, Milvus, pgvector.</p>
+
+<h3>Prompt Engineering</h3>
+<p>The practice of designing effective inputs (prompts) to get optimal outputs from AI models. Better prompts produce dramatically better results.</p>
+<p><strong>Techniques:</strong> Few-shot, Chain-of-thought, System prompts, Role-playing, Structured output.</p>
+
+<h3 id="c-transformers">Transformers</h3>
+<p>The neural network architecture behind virtually all modern LLMs. Uses self-attention to understand relationships between all parts of the input simultaneously.</p>
+<p><strong>Key Paper:</strong> "Attention Is All You Need" (2017) — replaced recurrence with self-attention.</p>
+
+<h3>Transfer Learning</h3>
+<p>Using knowledge learned from one task to improve performance on a different, related task. Pre-training on general data, then specializing.</p>
+<p><strong>Key Insight:</strong> This is why you can fine-tune a model trained on the internet for your specific domain.</p>
+
+<h3>Diffusion Models</h3>
+<p>Generative models that learn to create images by gradually removing noise. The foundation behind DALL-E, Midjourney, and Stable Diffusion.</p>
+<p><strong>Process:</strong> Add noise to images → Train model to reverse the noise → Generate new images from pure noise.</p>
+
+<h3>MLOps</h3>
+<p>The practice of deploying, monitoring, and maintaining ML models in production. The "DevOps" of machine learning.</p>
+<p><strong>Key concerns:</strong> Model versioning, data drift detection, A/B testing, monitoring, retraining pipelines.</p>
+
+<h3>Multimodal AI</h3>
+<p>AI systems that can process and generate multiple types of content — text, images, audio, video — within a single model.</p>
+<p><strong>Examples:</strong> GPT-5.2 (text + vision + audio), Gemini 2.5 (text + image + video), Claude Opus 4.6 (text + vision).</p>
+
+<h3 id="c-federated">Federated Learning</h3>
+<p>Training AI models across decentralized devices without sharing raw data. Each device trains locally and only shares model updates.</p>
+<p><strong>Use cases:</strong> Healthcare (HIPAA compliance), mobile keyboards (next-word prediction), financial fraud detection.</p>
+
+<h3>Responsible AI</h3>
+<p>The practice of developing and deploying AI systems that are fair, transparent, accountable, and safe.</p>
+<p><strong>Concerns:</strong> Bias, hallucination, privacy, explainability, environmental impact, job displacement.</p>
+
+<h3>Knowledge Graphs</h3>
+<p>Structured representations of real-world entities and their relationships, enabling AI to reason about connected information.</p>
+<p><strong>Examples:</strong> Google Knowledge Graph, Wikidata, enterprise knowledge management systems.</p>
+
+<h3>Synthetic Data</h3>
+<p>Artificially generated data that mimics real-world data, used when real data is scarce, expensive, or privacy-sensitive.</p>
+<p><strong>Uses:</strong> Training data augmentation, testing, privacy preservation, bias reduction.</p>
+
+<h3>Edge AI</h3>
+<p>Running AI models directly on devices (phones, cameras, IoT) rather than in the cloud, enabling faster responses and offline operation.</p>
+<p><strong>Examples:</strong> On-device speech recognition, real-time video analysis, autonomous vehicle processing.</p>
+
+<!-- ═══════════════════ 2. LLM RUBRIC ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="llm-rubric">2. LLM Model Rubric</h2>
+<p>27 models from 12+ providers — compared by capabilities, pricing, and use cases.</p>
+
+<table>
+<tr><th>Model</th><th>Provider</th><th>Context</th><th>Pricing Tier</th><th>Category</th><th>Docs</th></tr>
+<tr><td><strong>GPT-5.2</strong></td><td>OpenAI</td><td>200K</td><td>Premium</td><td>Frontier</td><td><a href="https://platform.openai.com/docs/models">Link</a></td></tr>
+<tr><td><strong>GPT-4.1</strong></td><td>OpenAI</td><td>1M</td><td>Standard</td><td>Workhorse</td><td><a href="https://platform.openai.com/docs/models">Link</a></td></tr>
+<tr><td><strong>GPT-4.1 mini</strong></td><td>OpenAI</td><td>1M</td><td>Budget</td><td>Lightweight</td><td><a href="https://platform.openai.com/docs/models">Link</a></td></tr>
+<tr><td><strong>o3</strong></td><td>OpenAI</td><td>200K</td><td>Premium</td><td>Reasoning</td><td><a href="https://platform.openai.com/docs/models">Link</a></td></tr>
+<tr><td><strong>o4-mini</strong></td><td>OpenAI</td><td>200K</td><td>Standard</td><td>Reasoning</td><td><a href="https://platform.openai.com/docs/models">Link</a></td></tr>
+<tr><td><strong>Claude Opus 4.6</strong></td><td>Anthropic</td><td>200K</td><td>Premium</td><td>Frontier</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/models">Link</a></td></tr>
+<tr><td><strong>Claude Sonnet 4.6</strong></td><td>Anthropic</td><td>200K</td><td>Standard</td><td>Workhorse</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/models">Link</a></td></tr>
+<tr><td><strong>Claude Haiku 4.5</strong></td><td>Anthropic</td><td>200K</td><td>Budget</td><td>Lightweight</td><td><a href="https://docs.anthropic.com/en/docs/about-claude/models">Link</a></td></tr>
+<tr><td><strong>Gemini 2.5 Pro</strong></td><td>Google</td><td>1M</td><td>Premium</td><td>Frontier</td><td><a href="https://ai.google.dev/models/gemini">Link</a></td></tr>
+<tr><td><strong>Gemini 2.5 Flash</strong></td><td>Google</td><td>1M</td><td>Budget</td><td>Workhorse</td><td><a href="https://ai.google.dev/models/gemini">Link</a></td></tr>
+<tr><td><strong>Gemini 2.5 Flash-Lite</strong></td><td>Google</td><td>1M</td><td>Budget</td><td>Lightweight</td><td><a href="https://ai.google.dev/models/gemini">Link</a></td></tr>
+<tr><td><strong>Llama 4 Maverick</strong></td><td>Meta</td><td>1M</td><td>Free (open)</td><td>Frontier</td><td><a href="https://llama.meta.com">Link</a></td></tr>
+<tr><td><strong>Llama 4 Scout</strong></td><td>Meta</td><td>10M</td><td>Free (open)</td><td>Workhorse</td><td><a href="https://llama.meta.com">Link</a></td></tr>
+<tr><td><strong>Llama 3.3 70B</strong></td><td>Meta</td><td>128K</td><td>Free (open)</td><td>Community</td><td><a href="https://llama.meta.com">Link</a></td></tr>
+<tr><td><strong>Mistral Large 2</strong></td><td>Mistral</td><td>128K</td><td>Standard</td><td>Frontier</td><td><a href="https://docs.mistral.ai">Link</a></td></tr>
+<tr><td><strong>Mistral Small 3.1</strong></td><td>Mistral</td><td>128K</td><td>Budget</td><td>Lightweight</td><td><a href="https://docs.mistral.ai">Link</a></td></tr>
+<tr><td><strong>Codestral</strong></td><td>Mistral</td><td>256K</td><td>Standard</td><td>Code</td><td><a href="https://docs.mistral.ai">Link</a></td></tr>
+<tr><td><strong>Command R+</strong></td><td>Cohere</td><td>128K</td><td>Standard</td><td>RAG</td><td><a href="https://docs.cohere.com">Link</a></td></tr>
+<tr><td><strong>Grok-4</strong></td><td>xAI</td><td>256K</td><td>Premium</td><td>Frontier</td><td><a href="https://docs.x.ai">Link</a></td></tr>
+<tr><td><strong>Grok-3 mini</strong></td><td>xAI</td><td>128K</td><td>Standard</td><td>Reasoning</td><td><a href="https://docs.x.ai">Link</a></td></tr>
+<tr><td><strong>DeepSeek-V3</strong></td><td>DeepSeek</td><td>128K</td><td>Budget</td><td>Open</td><td><a href="https://platform.deepseek.com/docs">Link</a></td></tr>
+<tr><td><strong>DeepSeek-R1</strong></td><td>DeepSeek</td><td>128K</td><td>Budget</td><td>Reasoning</td><td><a href="https://platform.deepseek.com/docs">Link</a></td></tr>
+<tr><td><strong>Phi-4 Reasoning</strong></td><td>Microsoft</td><td>32K</td><td>Free (open)</td><td>Small</td><td><a href="https://huggingface.co/microsoft">Link</a></td></tr>
+<tr><td><strong>Qwen3 235B</strong></td><td>Alibaba</td><td>128K</td><td>Budget</td><td>Open</td><td><a href="https://huggingface.co/Qwen">Link</a></td></tr>
+<tr><td><strong>Qwen3 32B</strong></td><td>Alibaba</td><td>128K</td><td>Free (open)</td><td>Community</td><td><a href="https://huggingface.co/Qwen">Link</a></td></tr>
+<tr><td><strong>Amazon Nova Pro</strong></td><td>Amazon</td><td>300K</td><td>Budget</td><td>Enterprise</td><td><a href="https://docs.aws.amazon.com/bedrock">Link</a></td></tr>
+<tr><td><strong>Jamba 1.5 Large</strong></td><td>AI21 Labs</td><td>256K</td><td>Standard</td><td>Enterprise</td><td><a href="https://docs.ai21.com">Link</a></td></tr>
+</table>
+
+<!-- ═══════════════════ 3. MODEL TRAINING ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="model-training">3. Model Training &amp; AI History</h2>
+
+<h3 id="timeline">AI Timeline (1950–2025)</h3>
+<table>
+<tr><th>Year</th><th>Event</th><th>Significance</th></tr>
+<tr><td>1950</td><td><strong>The Turing Test</strong></td><td>Alan Turing publishes "Computing Machinery and Intelligence," proposing machines could think.</td></tr>
+<tr><td>1956</td><td><strong>Dartmouth Conference</strong></td><td>John McCarthy coins "artificial intelligence" — the official birth of AI as a field.</td></tr>
+<tr><td>1958</td><td><strong>The Perceptron</strong></td><td>Frank Rosenblatt builds the first artificial neural network capable of learning.</td></tr>
+<tr><td>1974</td><td><strong>First AI Winter</strong></td><td>Funding collapses after Lighthill Report criticizes AI progress.</td></tr>
+<tr><td>1980</td><td><strong>Expert Systems Rise</strong></td><td>Rule-based expert systems bring commercial success, then lead to second AI winter.</td></tr>
+<tr><td>1997</td><td><strong>Deep Blue Beats Kasparov</strong></td><td>IBM's Deep Blue defeats world chess champion using brute-force search.</td></tr>
+<tr><td>2012</td><td><strong>AlexNet &amp; Deep Learning</strong></td><td>Deep CNN wins ImageNet by huge margin, igniting the deep learning revolution.</td></tr>
+<tr><td>2017</td><td><strong>Attention Is All You Need</strong></td><td>Transformer architecture paper — foundation for GPT, BERT, and all modern LLMs.</td></tr>
+<tr><td>2019</td><td><strong>GPT-2 &amp; Scaling Begins</strong></td><td>OpenAI shows scaling up transformers produces surprisingly coherent text.</td></tr>
+<tr><td>2022</td><td><strong>ChatGPT Changes Everything</strong></td><td>ChatGPT reaches 100M users in two months, making AI accessible to all.</td></tr>
+<tr><td>2023</td><td><strong>The Frontier Race</strong></td><td>GPT-4, Claude 2, Gemini, Llama 2, Mistral launch in rapid succession.</td></tr>
+<tr><td>2024</td><td><strong>Reasoning &amp; Agents</strong></td><td>Chain-of-thought reasoning (o1, Claude 3.5), tool use, and agentic capabilities emerge.</td></tr>
+<tr><td>2025</td><td><strong>The Agent Era</strong></td><td>Claude Opus 4, GPT-5, Gemini 2.5 push boundaries with deep reasoning and multi-step agents.</td></tr>
+</table>
+
+<h3 id="training-tech">Training Technologies</h3>
+
+<div class="card">
+  <div class="card-title">RLHF (Reinforcement Learning from Human Feedback) <span class="badge" style="background:#10a37f">OpenAI</span></div>
+  <div class="card-body">Human raters rank model outputs; a reward model learns preferences, then the LLM is optimized via PPO to maximize that reward signal. This is what made ChatGPT feel conversational vs raw GPT-3.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Constitutional AI (CAI) <span class="badge" style="background:#d4a27f">Anthropic</span></div>
+  <div class="card-body">The model critiques its own outputs against a set of principles ("constitution"), reducing reliance on human labelers. Uses RLAIF (RL from AI Feedback) for the reward model.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Mechanistic Interpretability <span class="badge" style="background:#d4a27f">Anthropic</span></div>
+  <div class="card-body">Reverse-engineering how neural networks work by identifying interpretable features, circuits, and computational structures inside trained models.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Scaling Laws &amp; Compute-Optimal Training <span class="badge" style="background:#10a37f">OpenAI</span></div>
+  <div class="card-body">Predictable relationships between model size, dataset size, compute budget, and performance. Chinchilla showed most models were under-trained on too little data.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Pathways &amp; Multi-Task Training <span class="badge" style="background:#4285f4">Google</span></div>
+  <div class="card-body">One model handles thousands of tasks across modalities. Sparse activation means only a fraction of parameters are used per input. Foundation for Gemini.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Knowledge Distillation <span class="badge" style="background:#4285f4">Google</span></div>
+  <div class="card-body">A large "teacher" model's knowledge is compressed into a smaller, faster "student" model. Used for Gemini Flash and Nano variants.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Open-Weight Training &amp; Community <span class="badge" style="background:#0668e1">Meta</span></div>
+  <div class="card-body">Meta releases model weights publicly. Quantization techniques (GGUF, GPTQ, AWQ) make large models run on consumer hardware.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">FSDP (Fully Sharded Data Parallel) <span class="badge" style="background:#0668e1">Meta</span></div>
+  <div class="card-body">Shards model parameters, gradients, and optimizer states across GPUs. Scales to thousands of GPUs with near-linear efficiency. Now a core PyTorch feature.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Colossus Supercluster Training <span class="badge" style="background:#1d9bf0">xAI</span></div>
+  <div class="card-body">xAI built Colossus with 100,000+ H100 GPUs. Combined with real-time data from X for training data freshness.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Mixture of Experts (MoE) <span class="badge" style="background:#ff7000">Mistral</span></div>
+  <div class="card-body">A routing mechanism sends each token to only a subset of specialized "expert" sub-networks. Mixtral 8x7B has 47B total params but uses ~13B per forward pass.</div>
+</div>
+
+<h3 id="pros-cons">Pros &amp; Cons of LLMs</h3>
+<div class="grid2">
+<div>
+<h4 class="pro">Pros</h4>
+<div class="kp"><strong>Unprecedented Productivity</strong> — 10x output across knowledge work.</div>
+<div class="kp"><strong>Democratized Knowledge</strong> — Expert-level explanations for anyone.</div>
+<div class="kp"><strong>Accelerated Development</strong> — AI coding assistants ship code faster.</div>
+<div class="kp"><strong>Breaking Language Barriers</strong> — Real-time translation.</div>
+<div class="kp"><strong>Scientific Discovery</strong> — Literature review, hypothesis generation.</div>
+<div class="kp"><strong>Accessibility</strong> — Voice interfaces, content simplification.</div>
+</div>
+<div>
+<h4 class="con">Cons</h4>
+<div class="kp"><strong>Hallucination</strong> — Confidently generates incorrect information.</div>
+<div class="kp"><strong>Bias Amplification</strong> — Inherits biases from training data.</div>
+<div class="kp"><strong>Energy Consumption</strong> — Massive compute requirements.</div>
+<div class="kp"><strong>Concentration of Power</strong> — Few companies train frontier models.</div>
+<div class="kp"><strong>Copyright Concerns</strong> — Training data legal uncertainty.</div>
+<div class="kp"><strong>Job Displacement</strong> — Automation of knowledge work.</div>
+</div>
+</div>
+
+<h3 id="individual-training">Individual Fine-Tuning Guide</h3>
+<p><strong>What is Fine-Tuning?</strong> Takes a pre-trained model and continues training on your specific dataset. Much cheaper than training from scratch — hours instead of months.</p>
+
+<table>
+<tr><th>Method</th><th>VRAM</th><th>Params Trained</th><th>Speed</th><th>Cost</th></tr>
+<tr><td>Full Fine-Tuning</td><td>160+ GB</td><td>100%</td><td>Slow</td><td>$$$</td></tr>
+<tr><td>LoRA</td><td>24-48 GB</td><td>~0.5%</td><td>Fast</td><td>$</td></tr>
+<tr><td>QLoRA</td><td>12-24 GB</td><td>~0.5%</td><td>Fast</td><td>$</td></tr>
+</table>
+
+<table>
+<tr><th>Approach</th><th>When to Use</th><th>Examples Needed</th><th>Best For</th></tr>
+<tr><td>Prompt Engineering</td><td>Quick results, base model almost works</td><td>&lt;50</td><td>Quick iteration</td></tr>
+<tr><td>RAG</td><td>Need specific docs, knowledge changes</td><td>N/A (docs)</td><td>Knowledge-heavy tasks</td></tr>
+<tr><td>Fine-Tuning</td><td>Consistent style/format, quality ceiling hit</td><td>500+</td><td>Style &amp; format</td></tr>
+</table>
+
+<!-- ═══════════════════ 4. PROMPT ENGINEERING ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="prompt-engineering">4. Prompt Engineering</h2>
+<p>18 techniques across 5 categories for getting better results from AI models.</p>
+
+<h3>Quick Tips</h3>
+<div class="kp"><strong>Be Specific, Not Vague</strong> — Replace generic requests with precise instructions (format, length, tone, audience).</div>
+<div class="kp"><strong>Give Context &amp; Role</strong> — Set the scene: "You are a senior Python developer reviewing code for a junior engineer."</div>
+<div class="kp"><strong>Show, Don't Just Tell</strong> — Include examples of what you want. One concrete example is worth a hundred words.</div>
+<div class="kp"><strong>Break Down Complex Tasks</strong> — Split big tasks into sequential steps.</div>
+<div class="kp"><strong>Iterate and Refine</strong> — Treat prompting as a conversation, not a one-shot.</div>
+
+<h3>Core Techniques</h3>
+<div class="card">
+  <div class="card-title">Zero-Shot Prompting</div>
+  <div class="card-body">Ask the model to perform a task without any examples. Works for simple, well-defined tasks where the model has strong training data.</div>
+</div>
+<div class="card">
+  <div class="card-title">Few-Shot Prompting</div>
+  <div class="card-body">Provide 2-5 examples of desired input-output pairs before your actual request. Dramatically improves consistency and formatting.</div>
+</div>
+<div class="card">
+  <div class="card-title">Chain-of-Thought (CoT)</div>
+  <div class="card-body">Ask the model to "think step by step." Forces explicit reasoning that catches errors and produces better answers for math, logic, and analysis.</div>
+</div>
+<div class="card">
+  <div class="card-title">System Prompts</div>
+  <div class="card-body">Set persistent instructions that define the AI's role, tone, constraints, and output format across the entire conversation.</div>
+</div>
+<div class="card">
+  <div class="card-title">Role-Based Prompting</div>
+  <div class="card-body">Assign the model a specific persona: "You are a security auditor." Changes tone, vocabulary, and focus areas.</div>
+</div>
+<div class="card">
+  <div class="card-title">Structured Output</div>
+  <div class="card-body">Request output in a specific format (JSON, Markdown, tables). Use schema definitions for reliable machine-readable responses.</div>
+</div>
+
+<h3>Advanced Techniques</h3>
+<div class="card">
+  <div class="card-title">Tree of Thoughts</div>
+  <div class="card-body">Explore multiple reasoning paths simultaneously and evaluate which approach leads to the best answer. For complex problems with multiple valid approaches.</div>
+</div>
+<div class="card">
+  <div class="card-title">Self-Consistency</div>
+  <div class="card-body">Generate multiple responses to the same prompt and take the majority answer. Reduces variance and improves reliability on reasoning tasks.</div>
+</div>
+<div class="card">
+  <div class="card-title">ReAct (Reason + Act)</div>
+  <div class="card-body">Interleave reasoning ("I need to find X") with actions ("search for X") and observations ("I found Y"). The foundation for AI agents.</div>
+</div>
+<div class="card">
+  <div class="card-title">Meta-Prompting</div>
+  <div class="card-body">Ask the AI to generate or improve prompts. "What questions should I ask you to get the best result for X?"</div>
+</div>
+<div class="card">
+  <div class="card-title">Constrained Generation</div>
+  <div class="card-body">Set explicit boundaries: word limits, vocabulary restrictions, format requirements. Prevents rambling and ensures output meets specifications.</div>
+</div>
+<div class="card">
+  <div class="card-title">Prompt Chaining</div>
+  <div class="card-body">Break complex tasks into sequential prompts where each output feeds into the next. Research → Outline → Draft → Edit.</div>
+</div>
+
+<!-- ═══════════════════ 5. AI PRODUCTS ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="products">5. AI Products Explorer</h2>
+<p>50 companies building the AI ecosystem — from model providers to developer tools to creative platforms.</p>
+
+<table>
+<tr><th>Company</th><th>Key Products</th><th>Category</th></tr>
+<tr><td><strong><a href="https://openai.com">OpenAI</a></strong></td><td>ChatGPT, GPT-5.2, DALL-E, Sora</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://anthropic.com">Anthropic</a></strong></td><td>Claude, Claude Code, Agent SDK</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://deepmind.google">Google</a></strong></td><td>Gemini, Vertex AI, NotebookLM</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://microsoft.com/ai">Microsoft</a></strong></td><td>Copilot, Azure AI, Phi models</td><td>Platform</td></tr>
+<tr><td><strong><a href="https://ai.meta.com">Meta</a></strong></td><td>Llama, PyTorch, AI Studio</td><td>Open Source</td></tr>
+<tr><td><strong><a href="https://aws.amazon.com/bedrock">AWS</a></strong></td><td>Bedrock, SageMaker, Nova</td><td>Cloud</td></tr>
+<tr><td><strong><a href="https://midjourney.com">Midjourney</a></strong></td><td>Midjourney image generation</td><td>Image Gen</td></tr>
+<tr><td><strong><a href="https://stability.ai">Stability AI</a></strong></td><td>Stable Diffusion, SDXL</td><td>Image Gen</td></tr>
+<tr><td><strong><a href="https://huggingface.co">Hugging Face</a></strong></td><td>Model Hub, Transformers, Spaces</td><td>Platform</td></tr>
+<tr><td><strong><a href="https://perplexity.ai">Perplexity</a></strong></td><td>AI-powered search engine</td><td>Search</td></tr>
+<tr><td><strong><a href="https://runwayml.com">Runway</a></strong></td><td>Gen-3 video generation</td><td>Video Gen</td></tr>
+<tr><td><strong><a href="https://elevenlabs.io">ElevenLabs</a></strong></td><td>Voice synthesis, dubbing</td><td>Audio</td></tr>
+<tr><td><strong><a href="https://databricks.com">Databricks</a></strong></td><td>Lakehouse AI, MLflow, DBRX</td><td>Data + ML</td></tr>
+<tr><td><strong><a href="https://cohere.com">Cohere</a></strong></td><td>Command R+, Embed, RAG</td><td>Enterprise AI</td></tr>
+<tr><td><strong><a href="https://nvidia.com/ai">NVIDIA</a></strong></td><td>GPUs, CUDA, NeMo, TensorRT</td><td>Hardware + SW</td></tr>
+<tr><td><strong><a href="https://langchain.com">LangChain</a></strong></td><td>LangChain, LangSmith, LangGraph</td><td>Framework</td></tr>
+<tr><td><strong><a href="https://llamaindex.ai">LlamaIndex</a></strong></td><td>Data framework for LLM apps</td><td>Framework</td></tr>
+<tr><td><strong><a href="https://pinecone.io">Pinecone</a></strong></td><td>Vector database (managed)</td><td>Vector DB</td></tr>
+<tr><td><strong><a href="https://weaviate.io">Weaviate</a></strong></td><td>Open-source vector database</td><td>Vector DB</td></tr>
+<tr><td><strong><a href="https://crewai.com">CrewAI</a></strong></td><td>Multi-agent orchestration</td><td>Agents</td></tr>
+<tr><td><strong><a href="https://github.com/microsoft/autogen">AutoGen</a></strong></td><td>Microsoft multi-agent framework</td><td>Agents</td></tr>
+<tr><td><strong><a href="https://scale.com">Scale AI</a></strong></td><td>Data labeling, RLHF, evaluation</td><td>Data</td></tr>
+<tr><td><strong><a href="https://wandb.ai">Weights &amp; Biases</a></strong></td><td>Experiment tracking, MLOps</td><td>MLOps</td></tr>
+<tr><td><strong><a href="https://snowflake.com/ai">Snowflake</a></strong></td><td>Cortex AI, Arctic, data cloud</td><td>Data + AI</td></tr>
+<tr><td><strong><a href="https://vercel.com/ai">Vercel</a></strong></td><td>AI SDK, v0 (UI gen)</td><td>Frontend</td></tr>
+<tr><td><strong><a href="https://github.com/features/copilot">GitHub</a></strong></td><td>Copilot, Copilot Workspace</td><td>Code</td></tr>
+<tr><td><strong><a href="https://cursor.com">Cursor</a></strong></td><td>AI-native code editor</td><td>Code</td></tr>
+<tr><td><strong><a href="https://jasper.ai">Jasper</a></strong></td><td>AI marketing content</td><td>Marketing</td></tr>
+<tr><td><strong><a href="https://notion.so/product/ai">Notion</a></strong></td><td>Notion AI assistant</td><td>Productivity</td></tr>
+<tr><td><strong><a href="https://salesforce.com/ai">Salesforce</a></strong></td><td>Einstein AI, Agentforce</td><td>Enterprise CRM</td></tr>
+<tr><td><strong><a href="https://ibm.com/watson">IBM</a></strong></td><td>watsonx, Granite models</td><td>Enterprise</td></tr>
+<tr><td><strong><a href="https://palantir.com">Palantir</a></strong></td><td>AIP (AI Platform)</td><td>Enterprise</td></tr>
+<tr><td><strong><a href="https://mistral.ai">Mistral AI</a></strong></td><td>Mistral Large, Codestral, Le Chat</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://groq.com">Groq</a></strong></td><td>LPU inference (ultra-fast)</td><td>Inference</td></tr>
+<tr><td><strong><a href="https://replicate.com">Replicate</a></strong></td><td>Model hosting &amp; API</td><td>Inference</td></tr>
+<tr><td><strong><a href="https://descript.com">Descript</a></strong></td><td>AI video/audio editing</td><td>Media</td></tr>
+<tr><td><strong><a href="https://synthesia.io">Synthesia</a></strong></td><td>AI video avatars</td><td>Video</td></tr>
+<tr><td><strong><a href="https://grammarly.com">Grammarly</a></strong></td><td>AI writing assistant</td><td>Writing</td></tr>
+<tr><td><strong><a href="https://together.ai">Together AI</a></strong></td><td>Open-source model hosting</td><td>Inference</td></tr>
+<tr><td><strong><a href="https://modal.com">Modal</a></strong></td><td>Serverless GPU compute</td><td>Infrastructure</td></tr>
+<tr><td><strong><a href="https://x.ai">xAI</a></strong></td><td>Grok-4, Colossus cluster</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://deepseek.com">DeepSeek</a></strong></td><td>DeepSeek-V3, R1 (open)</td><td>Model Provider</td></tr>
+<tr><td><strong><a href="https://canva.com/ai">Canva</a></strong></td><td>Magic Design, AI image gen</td><td>Design</td></tr>
+<tr><td><strong><a href="https://adobe.com/sensei">Adobe</a></strong></td><td>Firefly, Sensei AI</td><td>Creative</td></tr>
+<tr><td><strong><a href="https://figma.com/ai">Figma</a></strong></td><td>AI design tools</td><td>Design</td></tr>
+<tr><td><strong><a href="https://suno.com">Suno</a></strong></td><td>AI music generation</td><td>Music</td></tr>
+<tr><td><strong><a href="https://replit.com">Replit</a></strong></td><td>AI coding &amp; deployment</td><td>Code</td></tr>
+<tr><td><strong><a href="https://zapier.com/ai">Zapier</a></strong></td><td>AI automation workflows</td><td>Automation</td></tr>
+<tr><td><strong><a href="https://speechify.com">Speechify</a></strong></td><td>AI text-to-speech</td><td>Audio</td></tr>
+</table>
+
+<!-- ═══════════════════ 6. AI TOOLS & PROTOCOLS ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="ai-tools">6. AI Tools &amp; Protocols</h2>
+<p>Understand the building blocks of modern AI systems — what agents are, how they connect to tools through MCP, what APIs do, and how it all fits together.</p>
+
+<h3>Quick Reference: How It All Fits Together</h3>
+<div class="highlight-box">
+  <strong>1.</strong> You ask an AI Agent to do something<br>
+  <strong>2.</strong> The Agent reasons about what tools it needs (Function Calling)<br>
+  <strong>3.</strong> It discovers available tools via MCP (tools/list)<br>
+  <strong>4.</strong> It calls the right tool, which hits an API endpoint<br>
+  <strong>5.</strong> The API authenticates the request using an API Key<br>
+  <strong>6.</strong> The result flows back through the chain to the Agent<br>
+  <strong>7.</strong> The Agent uses the result to continue or complete your task
+</div>
+
+<h3 id="t-agents">AI Agents</h3>
+<p><strong>Tagline:</strong> AI that acts, not just responds</p>
+<p>An AI agent is an autonomous system that can plan, reason, use tools, and take multi-step actions. Agents follow an "agentic loop": Observe → Think → Act → Evaluate → Repeat.</p>
+<p><strong>Examples:</strong> <a href="https://claude.ai/code">Claude Code</a> (Anthropic's CLI agent), Devin, AutoGPT, CrewAI</p>
+<p><strong>Analogy:</strong> A chatbot is a reference librarian — ask a question, get an answer. An agent is an executive assistant — say "plan my trip to Tokyo" and they book flights, reserve hotels, and send the itinerary.</p>
+
+<h3>Model Context Protocol (MCP)</h3>
+<p><strong>Tagline:</strong> USB-C for AI — one standard to connect everything</p>
+<p>MCP is an open standard created by Anthropic that defines how AI apps communicate with external tools. Architecture: MCP Host → MCP Client → MCP Server. Three primitives: Tools (actions), Resources (data), Prompts (templates).</p>
+<p><strong>Examples:</strong> <a href="https://claude.ai">Claude Desktop</a>, GitHub MCP Server, Database Servers, Slack/Calendar integrations</p>
+
+<h3>APIs</h3>
+<p><strong>Tagline:</strong> The plumbing that connects all software</p>
+<p>An API (Application Programming Interface) is how software talks to other software. Common styles: REST (most popular), GraphQL (flexible queries), gRPC (high performance).</p>
+<p><strong>Examples:</strong> <a href="https://stripe.com/docs/api">Stripe API</a>, <a href="https://platform.openai.com/docs">OpenAI API</a>, <a href="https://docs.anthropic.com">Anthropic API</a>, <a href="https://developers.google.com/maps">Google Maps API</a></p>
+
+<h3>API Keys &amp; Codes</h3>
+<p><strong>Tagline:</strong> Your identity card for accessing AI services</p>
+<p>API keys are unique strings that identify and authenticate you when calling an API. They control access, track usage, and enforce rate limits. <strong>NEVER share your API key publicly.</strong></p>
+<p><strong>Analogy:</strong> Like a gym membership card — swipe to get in (authenticate), tracks visits (usage), membership level determines equipment access (permissions).</p>
+
+<h3>SDKs &amp; Libraries</h3>
+<p><strong>Tagline:</strong> Pre-built code that makes APIs easy to use</p>
+<p>An SDK wraps an API into simple function calls. They handle authentication, retries, error parsing, and response typing automatically.</p>
+<p><strong>Examples:</strong> <a href="https://github.com/openai/openai-python">openai (Python)</a>, <a href="https://github.com/anthropics/anthropic-sdk-typescript">@anthropic-ai/sdk</a>, <a href="https://github.com/langchain-ai/langchain">LangChain</a>, <a href="https://sdk.vercel.ai">Vercel AI SDK</a></p>
+
+<h3>Function / Tool Calling</h3>
+<p><strong>Tagline:</strong> How AI models reach beyond text generation</p>
+<p>Function calling is the ability for an LLM to output structured tool calls instead of just text. The model generates a JSON object describing which function to invoke and with what arguments. Your application executes the function and feeds the result back.</p>
+<p><strong>Analogy:</strong> A manager who writes detailed memos for an assistant to execute. The model is the manager, your code is the assistant.</p>
+
+<h3>Connection Map</h3>
+<table>
+<tr><th>From</th><th>Relationship</th><th>To</th></tr>
+<tr><td>AI Agents</td><td>discover tools via</td><td>MCP</td></tr>
+<tr><td>AI Agents</td><td>call services through</td><td>APIs</td></tr>
+<tr><td>MCP</td><td>wraps and standardizes</td><td>APIs</td></tr>
+<tr><td>API Keys</td><td>authenticate</td><td>APIs</td></tr>
+<tr><td>SDKs</td><td>wraps for easy use</td><td>APIs</td></tr>
+<tr><td>Function Calling</td><td>core capability of</td><td>AI Agents</td></tr>
+<tr><td>Function Calling</td><td>mechanism behind</td><td>MCP</td></tr>
+</table>
+
+<!-- ═══════════════════ 7. CODE ASSISTANTS ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="code-assistants">7. Code Assistants &amp; AI Editors</h2>
+<p>10 tools for AI-assisted development — from IDE extensions to CLI agents to cloud IDEs.</p>
+
+<div class="card">
+  <div class="card-title">GitHub Copilot <span class="card-tag">IDE Extension</span> <span class="card-tag">$10-39/mo</span></div>
+  <div class="card-body">The original AI pair programmer. Inline completions, chat, multi-model support (GPT-5.2, Claude, Gemini). PR summaries and CLI integration.<br><strong>Platforms:</strong> VS Code, JetBrains, Neovim, Visual Studio, Xcode &middot; <a href="https://github.com/features/copilot">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Cursor <span class="card-tag">AI-Native IDE</span> <span class="card-tag">Free / $20/mo</span></div>
+  <div class="card-body">VS Code fork rebuilt for AI. Codebase-wide context with @-mentions, multi-file Composer, agent mode for autonomous execution. All VS Code extensions work.<br><strong>Platforms:</strong> macOS, Windows, Linux &middot; <a href="https://cursor.com">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Claude Code <span class="card-tag">CLI Agent</span> <span class="card-tag">API usage-based</span></div>
+  <div class="card-body">Agentic CLI tool from Anthropic. Full codebase awareness, multi-file editing, terminal commands, git workflow management, MCP integration, hooks system.<br><strong>Platforms:</strong> Terminal (macOS, Linux, WSL), VS Code, JetBrains &middot; <a href="https://claude.ai/code">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Windsurf <span class="card-tag">AI-Native IDE</span> <span class="card-tag">Free / $15/mo</span></div>
+  <div class="card-body">AI IDE (formerly Codeium) with Cascade agent for multi-step task execution, deep codebase indexing, terminal command execution, Supercomplete.<br><strong>Platforms:</strong> macOS, Windows, Linux &middot; <a href="https://windsurf.com">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Sourcegraph Cody <span class="card-tag">IDE Extension</span> <span class="card-tag">Free / $9/mo</span></div>
+  <div class="card-body">AI assistant backed by Sourcegraph's code intelligence. Multi-repo understanding, enterprise-ready with SSO. Custom commands for workflows.<br><strong>Platforms:</strong> VS Code, JetBrains, Neovim, Web &middot; <a href="https://sourcegraph.com/cody">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Aider <span class="card-tag">CLI Agent</span> <span class="card-tag">Free (open source)</span></div>
+  <div class="card-body">Open-source CLI coding assistant. Works with any LLM, git-aware with auto commits, multi-file editing, voice coding, repo mapping.<br><strong>Platforms:</strong> Terminal (macOS, Linux, Windows) &middot; <a href="https://aider.chat">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Continue <span class="card-tag">IDE Extension</span> <span class="card-tag">Free (open source)</span></div>
+  <div class="card-body">Open-source autopilot. Connect any LLM (local or API), tab autocomplete, customizable slash commands, fully extensible.<br><strong>Platforms:</strong> VS Code, JetBrains &middot; <a href="https://continue.dev">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Replit Agent <span class="card-tag">Cloud IDE + Agent</span> <span class="card-tag">Free / $25/mo</span></div>
+  <div class="card-body">Browser-based IDE with AI agent. Build full apps from natural language, auto deployment, built-in database and auth. No local setup.<br><strong>Platforms:</strong> Web Browser, Mobile &middot; <a href="https://replit.com">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Bolt.new <span class="card-tag">Browser IDE + Agent</span> <span class="card-tag">Free / $20/mo</span></div>
+  <div class="card-body">Browser-based AI dev environment by StackBlitz. Full-stack apps via WebContainers, instant previews, one-click Netlify deploy.<br><strong>Platforms:</strong> Web Browser &middot; <a href="https://bolt.new">Learn more</a></div>
+</div>
+
+<div class="card">
+  <div class="card-title">GitHub Copilot Workspace <span class="card-tag">Task-Oriented Agent</span> <span class="card-tag">Incl. w/ Copilot</span></div>
+  <div class="card-body">Task-centric environment. Takes a GitHub issue → generates implementation plan → produces multi-file code changes. Iterative refinement.<br><strong>Platforms:</strong> Web (GitHub) &middot; <a href="https://github.com/features/copilot">Learn more</a></div>
+</div>
+
+<!-- ═══════════════════ 8. RESOURCES ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="resources">8. Resources &amp; Community</h2>
+<p>30+ curated links for staying current on AI — research, news, forums, newsletters, courses, and video.</p>
+
+<h3>Research &amp; Papers</h3>
+<table>
+<tr><th>Resource</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>arXiv</strong></td><td>Primary preprint server for AI/ML research. Free access to all papers.</td><td><a href="https://arxiv.org/list/cs.AI/recent">arxiv.org</a></td></tr>
+<tr><td><strong>Papers With Code</strong></td><td>Links papers to open-source implementations and benchmarks.</td><td><a href="https://paperswithcode.com">paperswithcode.com</a></td></tr>
+<tr><td><strong>Semantic Scholar</strong></td><td>AI-powered academic search engine by Allen Institute.</td><td><a href="https://www.semanticscholar.org">semanticscholar.org</a></td></tr>
+<tr><td><strong>Google Scholar</strong></td><td>Broad academic search. Citation metrics and author profiles.</td><td><a href="https://scholar.google.com">scholar.google.com</a></td></tr>
+</table>
+
+<h3>News &amp; Publications</h3>
+<table>
+<tr><th>Resource</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>The Verge — AI</strong></td><td>AI coverage for broad audience. Product launches, policy.</td><td><a href="https://www.theverge.com/ai-artificial-intelligence">theverge.com/ai</a></td></tr>
+<tr><td><strong>TechCrunch — AI</strong></td><td>Startup and enterprise AI. Funding, launches.</td><td><a href="https://techcrunch.com/category/artificial-intelligence/">techcrunch.com/ai</a></td></tr>
+<tr><td><strong>Ars Technica — AI</strong></td><td>Technically-informed AI reporting with depth.</td><td><a href="https://arstechnica.com/ai/">arstechnica.com/ai</a></td></tr>
+<tr><td><strong>MIT Technology Review</strong></td><td>Premium AI journalism. Research and ethics.</td><td><a href="https://www.technologyreview.com/topic/artificial-intelligence/">technologyreview.com</a></td></tr>
+<tr><td><strong>AI News</strong></td><td>Dedicated AI news outlet. Enterprise focus.</td><td><a href="https://www.artificialintelligence-news.com">artificialintelligence-news.com</a></td></tr>
+</table>
+
+<h3>Forums &amp; Communities</h3>
+<table>
+<tr><th>Resource</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>r/MachineLearning</strong></td><td>Largest ML research community. Paper discussions, AMAs.</td><td><a href="https://www.reddit.com/r/MachineLearning/">reddit.com/r/ML</a></td></tr>
+<tr><td><strong>r/LocalLLaMA</strong></td><td>Running LLMs locally. Quantization, hardware, benchmarks.</td><td><a href="https://www.reddit.com/r/LocalLLaMA/">reddit.com/r/LocalLLaMA</a></td></tr>
+<tr><td><strong>r/ChatGPT</strong></td><td>ChatGPT users. Prompt techniques, use cases.</td><td><a href="https://www.reddit.com/r/ChatGPT/">reddit.com/r/ChatGPT</a></td></tr>
+<tr><td><strong>r/ClaudeAI</strong></td><td>Claude community. Tips, API discussions.</td><td><a href="https://www.reddit.com/r/ClaudeAI/">reddit.com/r/ClaudeAI</a></td></tr>
+<tr><td><strong>r/Singularity</strong></td><td>AGI discussion. Benchmark tracking.</td><td><a href="https://www.reddit.com/r/singularity/">reddit.com/r/singularity</a></td></tr>
+<tr><td><strong>Hacker News</strong></td><td>Y Combinator's tech forum. Technical depth.</td><td><a href="https://news.ycombinator.com">news.ycombinator.com</a></td></tr>
+<tr><td><strong>Hugging Face</strong></td><td>Open-source AI hub. 500K+ models, datasets, spaces.</td><td><a href="https://discuss.huggingface.co">huggingface.co</a></td></tr>
+<tr><td><strong>Anthropic Discord</strong></td><td>Official Anthropic community. Claude API help.</td><td><a href="https://discord.gg/anthropic">discord.gg/anthropic</a></td></tr>
+<tr><td><strong>OpenAI Forum</strong></td><td>Official developer community. API support.</td><td><a href="https://community.openai.com">community.openai.com</a></td></tr>
+<tr><td><strong>Latent Space</strong></td><td>AI engineering community and podcast.</td><td><a href="https://www.latent.space">latent.space</a></td></tr>
+</table>
+
+<h3>Newsletters</h3>
+<table>
+<tr><th>Newsletter</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>TLDR AI</strong></td><td>Daily 5-minute newsletter. Research + industry.</td><td><a href="https://tldr.tech/ai">tldr.tech/ai</a></td></tr>
+<tr><td><strong>The Batch — Andrew Ng</strong></td><td>Weekly from DeepLearning.AI. Curated picks.</td><td><a href="https://www.deeplearning.ai/the-batch/">deeplearning.ai/the-batch</a></td></tr>
+<tr><td><strong>Import AI — Jack Clark</strong></td><td>Weekly. AI policy, research, capabilities.</td><td><a href="https://importai.substack.com">importai.substack.com</a></td></tr>
+<tr><td><strong>The Neuron</strong></td><td>Daily. Practical focus, tool recommendations.</td><td><a href="https://www.theneurondaily.com">theneurondaily.com</a></td></tr>
+<tr><td><strong>Ben's Bites</strong></td><td>Daily. Product launches, tool discoveries.</td><td><a href="https://bensbites.com">bensbites.com</a></td></tr>
+</table>
+
+<h3>Courses &amp; Learning</h3>
+<table>
+<tr><th>Course</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>fast.ai</strong></td><td>Free, world-class deep learning course. Top-down approach.</td><td><a href="https://course.fast.ai">course.fast.ai</a></td></tr>
+<tr><td><strong>DeepLearning.AI</strong></td><td>Andrew Ng's platform. Short courses with AI labs.</td><td><a href="https://www.deeplearning.ai">deeplearning.ai</a></td></tr>
+<tr><td><strong>Anthropic Docs</strong></td><td>Claude API, prompt engineering, Agent SDK, MCP.</td><td><a href="https://docs.anthropic.com">docs.anthropic.com</a></td></tr>
+<tr><td><strong>OpenAI Docs</strong></td><td>GPT API, function calling, embeddings, fine-tuning.</td><td><a href="https://platform.openai.com/docs">platform.openai.com/docs</a></td></tr>
+<tr><td><strong>Hugging Face NLP Course</strong></td><td>Free NLP with Transformers. Hands-on.</td><td><a href="https://huggingface.co/learn/nlp-course">huggingface.co/learn</a></td></tr>
+</table>
+
+<h3>Podcasts &amp; Video</h3>
+<table>
+<tr><th>Channel</th><th>Description</th><th>Link</th></tr>
+<tr><td><strong>Latent Space Podcast</strong></td><td>AI engineering. Practitioners from Anthropic, OpenAI.</td><td><a href="https://www.latent.space/podcast">latent.space/podcast</a></td></tr>
+<tr><td><strong>Lex Fridman Podcast</strong></td><td>Long-form interviews with AI leaders.</td><td><a href="https://lexfridman.com/podcast/">lexfridman.com</a></td></tr>
+<tr><td><strong>Yannic Kilcher</strong></td><td>ML paper explanations and walkthroughs.</td><td><a href="https://www.youtube.com/@YannicKilcher">YouTube</a></td></tr>
+<tr><td><strong>3Blue1Brown</strong></td><td>Visual math + neural network explainers.</td><td><a href="https://www.youtube.com/@3blue1brown">YouTube</a></td></tr>
+<tr><td><strong>Two Minute Papers</strong></td><td>Short AI research summaries with demos.</td><td><a href="https://www.youtube.com/@TwoMinutePapers">YouTube</a></td></tr>
+</table>
+
+<h3>Staying Current: Recommended Routine</h3>
+<div class="grid3">
+<div class="card">
+  <div class="card-title">Daily</div>
+  <div class="card-body">
+    <div class="kp">Check TLDR AI or The Neuron</div>
+    <div class="kp">Skim r/LocalLLaMA and r/MachineLearning</div>
+    <div class="kp">Glance at Hacker News front page</div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">Weekly</div>
+  <div class="card-body">
+    <div class="kp">Read The Batch or Import AI</div>
+    <div class="kp">Listen to one Latent Space episode</div>
+    <div class="kp">Try one new tool or model</div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">Monthly</div>
+  <div class="card-body">
+    <div class="kp">Complete a DeepLearning.AI short course</div>
+    <div class="kp">Read 1-2 papers via Papers With Code</div>
+    <div class="kp">Build a small project with a new technique</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════ 9. BUILD GUIDES ═══════════════════ -->
+<div class="page-break"></div>
+<h2 id="guides">9. Build Guides</h2>
+<p>24 hands-on tutorials organized by provider. From beginner chatbots to advanced agents and MCP servers.</p>
+
+<h3>Anthropic (Claude) — 6 Guides</h3>
+<table>
+<tr><th>#</th><th>Guide</th><th>Level</th><th>Concepts</th></tr>
+<tr><td>A1</td><td><strong>Build a Chatbot with Claude</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>SDK setup, system prompts, conversation memory</td></tr>
+<tr><td>A2</td><td><strong>Streaming Responses</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>Token streaming, event handling, perceived latency</td></tr>
+<tr><td>A3</td><td><strong>Tool Use &amp; Function Calling</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Tool definitions, tool use loop, JSON schema</td></tr>
+<tr><td>A4</td><td><strong>RAG: Document Q&amp;A</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Document chunking, embeddings, vector stores, ChromaDB</td></tr>
+<tr><td>A5</td><td><strong>Building AI Agents</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>Agent loops, planning, multi-step reasoning, Agent SDK</td></tr>
+<tr><td>A6</td><td><strong>Build an MCP Server</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>MCP protocol, tool registration, resource exposure</td></tr>
+</table>
+
+<h3>OpenAI (GPT) — 6 Guides</h3>
+<table>
+<tr><th>#</th><th>Guide</th><th>Level</th><th>Concepts</th></tr>
+<tr><td>O1</td><td><strong>Build a Chatbot with GPT</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>Chat Completions API, message roles, history</td></tr>
+<tr><td>O2</td><td><strong>Function Calling with GPT</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Function definitions, tool choice, parallel calls</td></tr>
+<tr><td>O3</td><td><strong>RAG with OpenAI Embeddings</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>text-embedding-3-small, vector search</td></tr>
+<tr><td>O4</td><td><strong>OpenAI Assistants API</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Threads &amp; Runs, file search, code interpreter</td></tr>
+<tr><td>O5</td><td><strong>Structured Output</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>JSON mode, Pydantic integration, schema enforcement</td></tr>
+<tr><td>O6</td><td><strong>Vision &amp; Image Analysis</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>Vision API, image encoding, multi-image comparison</td></tr>
+</table>
+
+<h3>Google (Gemini) — 6 Guides</h3>
+<table>
+<tr><th>#</th><th>Guide</th><th>Level</th><th>Concepts</th></tr>
+<tr><td>G1</td><td><strong>Build a Chatbot with Gemini</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>Google GenAI SDK, chat sessions, safety settings</td></tr>
+<tr><td>G2</td><td><strong>Multimodal Input</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Image/PDF/audio analysis, native multimodal</td></tr>
+<tr><td>G3</td><td><strong>Image Generation</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Text-to-image, Imagen, style control</td></tr>
+<tr><td>G4</td><td><strong>Function Calling</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Function declarations, auto function calling</td></tr>
+<tr><td>G5</td><td><strong>Embeddings &amp; Search</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Google embeddings API, cosine similarity</td></tr>
+<tr><td>G6</td><td><strong>Grounded Search</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>Google Search grounding, source citations</td></tr>
+</table>
+
+<h3>Llama (Meta — Run Locally) — 6 Guides</h3>
+<table>
+<tr><th>#</th><th>Guide</th><th>Level</th><th>Concepts</th></tr>
+<tr><td>L1</td><td><strong>Run Llama Locally with Ollama</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>Ollama setup, local inference, API compatibility</td></tr>
+<tr><td>L2</td><td><strong>Use Llama with OpenAI SDK</strong></td><td><span class="badge" style="background:#22c55e">Beginner</span></td><td>Base URL override, provider switching, zero cost</td></tr>
+<tr><td>L3</td><td><strong>Local RAG with Llama</strong></td><td><span class="badge" style="background:#f59e0b">Intermediate</span></td><td>Local embeddings, private RAG, LangChain + Ollama</td></tr>
+<tr><td>L4</td><td><strong>Fine-Tune Llama on Your Data</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>QLoRA fine-tuning, Hugging Face PEFT, model merging</td></tr>
+<tr><td>L5</td><td><strong>Local AI Agents</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>Ollama tool calling, LangChain agents, private automation</td></tr>
+<tr><td>L6</td><td><strong>Quantize &amp; Optimize Models</strong></td><td><span class="badge" style="background:#ef4444">Advanced</span></td><td>GGUF format, quantization levels, llama.cpp</td></tr>
+</table>
+
+<h3>Quick Start</h3>
+<div class="code-block">git clone &lt;your-repo-url&gt;
+cd mcp_api/guides
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env and add your API keys:
+# ANTHROPIC_API_KEY=sk-ant-...
+# OPENAI_API_KEY=sk-...
+# GOOGLE_API_KEY=AIza...
+python anthropic_01_chatbot.py</div>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<hr class="section-divider" style="margin-top:40px;">
+<div class="footer-note">
+  <p><strong>AI Explorer</strong> — Built as an interactive learning experience for understanding AI from the ground up.</p>
+  <p style="margin-top:4px;">
+    <a href="https://docs.anthropic.com">Anthropic Docs</a> &middot;
+    <a href="https://platform.openai.com/docs">OpenAI Docs</a> &middot;
+    <a href="https://huggingface.co">Hugging Face</a>
+  </p>
+  <p style="margin-top:4px;">Not affiliated with any company mentioned. For educational purposes.</p>
+</div>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ export default function Navigation({ currentSection, onNavigate, theme, onToggle
     { id: 'model-training', label: 'Training' },
     { id: 'prompt-engineering', label: 'Prompting' },
     { id: 'products', label: 'Products' },
+    { id: 'ai-tools', label: 'Tools & Protocols' },
     { id: 'code-assistants', label: 'Code Editors' },
     { id: 'resources', label: 'Resources' },
     { id: 'guides', label: 'Guides' },

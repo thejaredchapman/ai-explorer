@@ -9,11 +9,12 @@ import ModelTraining from './components/ModelTraining';
 import PromptEngineering from './components/PromptEngineering';
 import ProductsExplorer from './components/ProductsExplorer';
 import CodeAssistants from './components/CodeAssistants';
+import AiToolsSection from './components/AiToolsSection';
 import ResourcesSection from './components/ResourcesSection';
 import GuidesSection from './components/GuidesSection';
 import './App.css';
 
-const SECTION_IDS = ['hero', 'concepts', 'llm-rubric', 'model-training', 'prompt-engineering', 'products', 'code-assistants', 'resources', 'guides'];
+const SECTION_IDS = ['hero', 'concepts', 'llm-rubric', 'model-training', 'prompt-engineering', 'products', 'ai-tools', 'code-assistants', 'resources', 'guides'];
 
 function App() {
   const [activeConceptId, setActiveConceptId] = useState(null);
@@ -103,6 +104,7 @@ function App() {
             <ModelTraining />
             <PromptEngineering />
             <ProductsExplorer />
+            <AiToolsSection />
             <CodeAssistants />
             <ResourcesSection />
             <GuidesSection />

@@ -135,6 +135,11 @@ export default function Hero({ onNavigate }) {
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">
+            <span className="hero-stat-num">6</span>
+            <span className="hero-stat-label">Tools & Protocols</span>
+          </div>
+          <div className="hero-stat-divider" />
+          <div className="hero-stat">
             <span className="hero-stat-num">10</span>
             <span className="hero-stat-label">Code Editors</span>
           </div>
