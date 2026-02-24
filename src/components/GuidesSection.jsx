@@ -176,7 +176,7 @@ export default function GuidesSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <span className="section-badge">Step 5 — Start Building</span>
+        <span className="section-badge">Step 8 — Start Building</span>
         <h2>Quick Start & How-To Guides</h2>
         <p>
           You have the concepts, compared the models, explored the products, and know your tools.

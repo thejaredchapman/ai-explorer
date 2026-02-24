@@ -52,7 +52,7 @@ export const guidesData = {
       file: 'anthropic_01_chatbot.py',
       category: 'beginner',
       provider: 'anthropic',
-      model: 'Claude Sonnet 4',
+      model: 'Claude Sonnet 4.6',
       icon: '💬',
       color: '#d97706',
       description: 'Create a conversational chatbot with memory using the Anthropic SDK. Learn how Claude handles multi-turn conversations with system prompts and message history.',
@@ -67,7 +67,7 @@ while True:
     messages.append({"role": "user", "content": user_input})
 
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=1024,
         system="You are a helpful coding assistant.",
         messages=messages,
@@ -85,7 +85,7 @@ while True:
       file: 'anthropic_02_streaming.py',
       category: 'beginner',
       provider: 'anthropic',
-      model: 'Claude Sonnet 4',
+      model: 'Claude Sonnet 4.6',
       icon: '⚡',
       color: '#d97706',
       description: 'Stream Claude responses token-by-token for real-time output. Reduces perceived latency and provides a ChatGPT-like typing experience.',
@@ -96,7 +96,7 @@ client = anthropic.Anthropic()
 
 # Stream response token by token
 with client.messages.stream(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Explain quantum computing"}],
 ) as stream:
@@ -111,7 +111,7 @@ with client.messages.stream(
       file: 'anthropic_03_tools.py',
       category: 'intermediate',
       provider: 'anthropic',
-      model: 'Claude Sonnet 4',
+      model: 'Claude Sonnet 4.6',
       icon: '🔧',
       color: '#d97706',
       description: 'Give Claude the ability to call functions — web search, calculator, database lookups. Implements the full tool-use loop: Claude decides which tool to call, you execute it, and return results.',
@@ -129,7 +129,7 @@ with client.messages.stream(
 }]
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-4-6",
     max_tokens=1024,
     tools=tools,
     messages=[{"role": "user", "content": "What's the weather in Tokyo?"}],
@@ -149,7 +149,7 @@ for block in response.content:
       file: 'anthropic_04_rag.py',
       category: 'intermediate',
       provider: 'anthropic',
-      model: 'Claude Sonnet 4',
+      model: 'Claude Sonnet 4.6',
       icon: '📚',
       color: '#d97706',
       description: 'Build a Retrieval-Augmented Generation system with Claude. Split documents, embed them, store in a vector database, and retrieve relevant context for accurate answers.',
@@ -165,7 +165,7 @@ vectorstore = Chroma.from_documents(chunks, embeddings)
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
 # RAG chain: retrieve context -> augment prompt -> generate
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-4-6")
 rag_chain = (
     {"context": retriever | format_docs,
      "question": RunnablePassthrough()}
@@ -180,7 +180,7 @@ rag_chain = (
       file: 'anthropic_05_agents.py',
       category: 'advanced',
       provider: 'anthropic',
-      model: 'Claude Sonnet 4',
+      model: 'Claude Sonnet 4.6',
       icon: '🤖',
       color: '#d97706',
       description: 'Build an autonomous agent that plans, uses tools, and iterates to complete tasks. Uses the Anthropic Agent SDK for multi-step reasoning with web search and code execution.',
@@ -195,7 +195,7 @@ messages = [{"role": "user", "content": "Research AI trends and summarize"}]
 
 while True:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=4096,
         tools=tools,
         messages=messages,
@@ -251,7 +251,7 @@ server.run()`,
       file: 'openai_01_chatbot.py',
       category: 'beginner',
       provider: 'openai',
-      model: 'GPT-4o',
+      model: 'GPT-4.1',
       icon: '💬',
       color: '#10a37f',
       description: 'Create a conversational chatbot using the OpenAI SDK. Learn the Chat Completions API, message roles, and how to maintain conversation history.',
@@ -266,7 +266,7 @@ while True:
     messages.append({"role": "user", "content": user_input})
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1",
         messages=messages,
     )
 
@@ -282,7 +282,7 @@ while True:
       file: 'openai_02_functions.py',
       category: 'intermediate',
       provider: 'openai',
-      model: 'GPT-4o',
+      model: 'GPT-4.1',
       icon: '🔧',
       color: '#10a37f',
       description: 'Give GPT the ability to call your functions. Define tool schemas, let the model decide when to call them, execute locally, and return results for the final answer.',
@@ -303,7 +303,7 @@ while True:
 }]
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4.1",
     messages=messages,
     tools=tools,
     tool_choice="auto",  # GPT decides when to call tools
@@ -322,10 +322,10 @@ if response.choices[0].message.tool_calls:
       file: 'openai_03_rag.py',
       category: 'intermediate',
       provider: 'openai',
-      model: 'GPT-4o + text-embedding-3-small',
+      model: 'GPT-4.1 + text-embedding-3-small',
       icon: '📚',
       color: '#10a37f',
-      description: 'Build a document Q&A system using OpenAI embeddings and GPT-4o. Uses text-embedding-3-small for fast, affordable embeddings with strong semantic search quality.',
+      description: 'Build a document Q&A system using OpenAI embeddings and GPT-4.1. Uses text-embedding-3-small for fast, affordable embeddings with strong semantic search quality.',
       concepts: ['OpenAI embeddings', 'text-embedding-3-small', 'Vector search', 'Context window management'],
       codePreview: `from openai import OpenAI
 
@@ -343,7 +343,7 @@ relevant_chunks = vector_search(query_embedding, stored_embeddings)
 
 # Generate answer with retrieved context
 answer = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4.1",
     messages=[
         {"role": "system", "content": f"Context: {relevant_chunks}"},
         {"role": "user", "content": user_question},
@@ -358,7 +358,7 @@ answer = client.chat.completions.create(
       file: 'openai_04_assistants.py',
       category: 'intermediate',
       provider: 'openai',
-      model: 'GPT-4o',
+      model: 'GPT-4.1',
       icon: '🧑‍💼',
       color: '#10a37f',
       description: 'Use the Assistants API for stateful, multi-turn conversations with built-in tools. OpenAI manages the thread history, file retrieval, and code execution for you.',
@@ -371,7 +371,7 @@ client = OpenAI()
 assistant = client.beta.assistants.create(
     name="Data Analyst",
     instructions="You analyze data and create visualizations.",
-    model="gpt-4o",
+    model="gpt-4.1",
     tools=[
         {"type": "code_interpreter"},
         {"type": "file_search"},
@@ -400,7 +400,7 @@ run = client.beta.threads.runs.create_and_poll(
       file: 'openai_05_structured.py',
       category: 'intermediate',
       provider: 'openai',
-      model: 'GPT-4o',
+      model: 'GPT-4.1',
       icon: '📋',
       color: '#10a37f',
       description: 'Extract structured JSON from natural language using GPT\'s native structured output mode. Guarantees valid JSON matching your schema every time.',
@@ -418,7 +418,7 @@ class MovieReview(BaseModel):
     cons: list[str]
 
 response = client.beta.chat.completions.parse(
-    model="gpt-4o",
+    model="gpt-4.1",
     messages=[
         {"role": "user", "content": "Review the movie Inception"},
     ],
@@ -432,14 +432,14 @@ print(f"{review.title}: {review.rating}/10")`,
     {
       id: 'openai-vision',
       number: 'O6',
-      title: 'Vision & Image Analysis with GPT-4o',
+      title: 'Vision & Image Analysis with GPT-4.1',
       file: 'openai_06_vision.py',
       category: 'advanced',
       provider: 'openai',
-      model: 'GPT-4o',
+      model: 'GPT-4.1',
       icon: '👁️',
       color: '#10a37f',
-      description: 'Analyze images, extract text from photos, compare visuals, and answer questions about what GPT-4o sees. Supports URLs and base64-encoded images.',
+      description: 'Analyze images, extract text from photos, compare visuals, and answer questions about what GPT-4.1 sees. Supports URLs and base64-encoded images.',
       concepts: ['Vision API', 'Image encoding', 'Visual Q&A', 'Multi-image comparison'],
       codePreview: `import base64
 from openai import OpenAI
@@ -451,7 +451,7 @@ with open("photo.jpg", "rb") as f:
     image_b64 = base64.b64encode(f.read()).decode()
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4.1",
     messages=[{
         "role": "user",
         "content": [
@@ -476,7 +476,7 @@ print(response.choices[0].message.content)`,
       file: 'gemini_01_chatbot.py',
       category: 'beginner',
       provider: 'google',
-      model: 'Gemini 2.0 Flash',
+      model: 'Gemini 2.5 Flash',
       icon: '💬',
       color: '#4285f4',
       description: 'Create a conversational chatbot using the Google GenAI SDK. Gemini\'s chat interface manages conversation history automatically with a simple API.',
@@ -484,7 +484,7 @@ print(response.choices[0].message.content)`,
       codePreview: `import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Start a chat session (history is managed automatically)
 chat = model.start_chat(history=[])
@@ -505,7 +505,7 @@ while True:
       file: 'gemini_02_multimodal.py',
       category: 'intermediate',
       provider: 'google',
-      model: 'Gemini 2.0 Flash',
+      model: 'Gemini 2.5 Flash',
       icon: '🖼️',
       color: '#4285f4',
       description: 'Send images, PDFs, audio, and video to Gemini for analysis. Gemini natively handles multiple modalities in a single request — no separate vision API needed.',
@@ -513,7 +513,7 @@ while True:
       codePreview: `import google.generativeai as genai
 from pathlib import Path
 
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Analyze an image
 image = genai.upload_file("photo.jpg")
@@ -538,7 +538,7 @@ response = model.generate_content([
       file: 'gemini_03_imagegen.py',
       category: 'intermediate',
       provider: 'google',
-      model: 'Gemini 2.0 Flash / Imagen',
+      model: 'Gemini 2.5 Flash / Imagen',
       icon: '🎨',
       color: '#4285f4',
       description: 'Generate images from text descriptions using Gemini and Imagen. Includes prompt engineering tips for photorealistic, illustration, and artistic styles.',
@@ -546,7 +546,7 @@ response = model.generate_content([
       codePreview: `import google.generativeai as genai
 from pathlib import Path
 
-model = genai.GenerativeModel("gemini-2.0-flash-exp")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 response = model.generate_content(
     "Generate an image: A futuristic cityscape at sunset "
@@ -570,7 +570,7 @@ for part in response.candidates[0].content.parts:
       file: 'gemini_04_functions.py',
       category: 'intermediate',
       provider: 'google',
-      model: 'Gemini 2.0 Flash',
+      model: 'Gemini 2.5 Flash',
       icon: '🔧',
       color: '#4285f4',
       description: 'Give Gemini the ability to call your functions. Define callable tools, let Gemini decide when to use them, and handle the execution loop.',
@@ -582,7 +582,7 @@ def get_weather(city: str) -> dict:
     return {"temp": 72, "condition": "sunny", "city": city}
 
 model = genai.GenerativeModel(
-    "gemini-2.0-flash",
+    "gemini-2.5-flash",
     tools=[get_weather],  # Pass Python functions directly
 )
 
@@ -636,14 +636,14 @@ similarities = np.dot(result["embedding"], query_emb["embedding"])`,
       file: 'gemini_06_grounding.py',
       category: 'advanced',
       provider: 'google',
-      model: 'Gemini 2.0 Flash',
+      model: 'Gemini 2.5 Flash',
       icon: '🔍',
       color: '#4285f4',
       description: 'Use Gemini with Google Search grounding for up-to-date, factual answers. Gemini automatically searches the web and cites sources in its responses.',
       concepts: ['Google Search grounding', 'Source citations', 'Factual accuracy', 'Real-time info'],
       codePreview: `import google.generativeai as genai
 
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Enable Google Search grounding
 response = model.generate_content(
@@ -735,7 +735,7 @@ print(response.choices[0].message.content)
       file: 'llama_03_rag.py',
       category: 'intermediate',
       provider: 'llama',
-      model: 'Llama 3.3 + nomic-embed-text',
+      model: 'Llama 3.3 70B + nomic-embed-text',
       icon: '📚',
       color: '#7c3aed',
       description: 'Build a fully local RAG system — no data leaves your machine. Uses Llama for generation and nomic-embed-text for embeddings, both running via Ollama.',

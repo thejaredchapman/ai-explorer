@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Navigation({ currentSection, onNavigate }) {
+export default function Navigation({ currentSection, onNavigate, theme, onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const sections = [
     { id: 'hero', label: 'Home' },
     { id: 'concepts', label: 'AI Concepts' },
     { id: 'llm-rubric', label: 'LLM Rubric' },
+    { id: 'model-training', label: 'Training' },
+    { id: 'prompt-engineering', label: 'Prompting' },
     { id: 'products', label: 'Products' },
     { id: 'code-assistants', label: 'Code Editors' },
     { id: 'resources', label: 'Resources' },
@@ -39,6 +41,16 @@ export default function Navigation({ currentSection, onNavigate }) {
           </button>
         ))}
       </div>
+
+      {/* Theme Toggle */}
+      <button
+        className="theme-toggle"
+        onClick={onToggleTheme}
+        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        {theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}
+      </button>
 
       {/* Mobile Hamburger */}
       <button

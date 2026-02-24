@@ -5,18 +5,35 @@ import Hero from './components/Hero';
 import AiConcepts from './components/AiConcepts';
 import ConceptDetail from './components/ConceptDetail';
 import LlmRubric from './components/LlmRubric';
+import ModelTraining from './components/ModelTraining';
+import PromptEngineering from './components/PromptEngineering';
 import ProductsExplorer from './components/ProductsExplorer';
 import CodeAssistants from './components/CodeAssistants';
 import ResourcesSection from './components/ResourcesSection';
 import GuidesSection from './components/GuidesSection';
 import './App.css';
 
-const SECTION_IDS = ['hero', 'concepts', 'llm-rubric', 'products', 'code-assistants', 'resources', 'guides'];
+const SECTION_IDS = ['hero', 'concepts', 'llm-rubric', 'model-training', 'prompt-engineering', 'products', 'code-assistants', 'resources', 'guides'];
 
 function App() {
   const [activeConceptId, setActiveConceptId] = useState(null);
   const [currentSection, setCurrentSection] = useState('hero');
   const isScrollingTo = useRef(false);
+
+  // Theme state — defaults to dark, persists in localStorage
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('ai-explorer-theme') || 'dark'; }
+    catch { return 'dark'; }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('ai-explorer-theme', theme); } catch {}
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  }, []);
 
   // Scroll-based section highlighting
   useEffect(() => {
@@ -72,7 +89,7 @@ function App() {
 
   return (
     <div className="app">
-      <Navigation currentSection={currentSection} onNavigate={navigateTo} />
+      <Navigation currentSection={currentSection} onNavigate={navigateTo} theme={theme} onToggleTheme={toggleTheme} />
       <AnimatePresence mode="wait">
         {activeConceptId ? (
           <main className="main-content" key="concept-detail">
@@ -83,6 +100,8 @@ function App() {
             <Hero onNavigate={navigateTo} />
             <AiConcepts onOpenDetail={openConceptDetail} />
             <LlmRubric />
+            <ModelTraining />
+            <PromptEngineering />
             <ProductsExplorer />
             <CodeAssistants />
             <ResourcesSection />

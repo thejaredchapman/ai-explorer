@@ -223,7 +223,7 @@ export const aiConcepts = [
         { field: 'Research', example: 'Scientists use LLMs to synthesize literature, generate hypotheses, and explain complex findings to non-specialist audiences.' },
         { field: 'Customer Service', example: 'AI chatbots handle customer inquiries with human-like understanding, resolving common issues without human intervention.' },
       ],
-      bigPicture: 'LLMs are the most commercially impactful AI technology today. They are a specific type of Generative AI, powered by Deep Learning (specifically the Transformer architecture). The key players are OpenAI (GPT-4o), Anthropic (Claude), Google (Gemini), and Meta (Llama). The race is defined by model scale, reasoning ability, safety, and context length. LLMs are evolving from text-only chatbots to multimodal agents that can see, hear, and take actions.',
+      bigPicture: 'LLMs are the most commercially impactful AI technology today. They are a specific type of Generative AI, powered by Deep Learning (specifically the Transformer architecture). The key players are OpenAI (GPT-5), Anthropic (Claude), Google (Gemini), and Meta (Llama). The race is defined by model scale, reasoning ability, safety, and context length. LLMs are evolving from text-only chatbots to multimodal agents that can see, hear, and take actions.',
     },
   },
   {
@@ -252,7 +252,7 @@ export const aiConcepts = [
         },
         {
           title: 'Beyond Classification',
-          content: 'Modern CV goes far beyond "is this a cat or a dog?" Object detection finds and locates multiple objects in an image with bounding boxes. Semantic segmentation classifies every single pixel. Pose estimation detects human body positions. OCR (Optical Character Recognition) reads text from images. 3D reconstruction builds three-dimensional models from 2D images. Multimodal models like GPT-4o and Gemini combine vision with language — you can show them a photo and ask questions about it in natural language.',
+          content: 'Modern CV goes far beyond "is this a cat or a dog?" Object detection finds and locates multiple objects in an image with bounding boxes. Semantic segmentation classifies every single pixel. Pose estimation detects human body positions. OCR (Optical Character Recognition) reads text from images. 3D reconstruction builds three-dimensional models from 2D images. Multimodal models like GPT-5.2 and Gemini combine vision with language — you can show them a photo and ask questions about it in natural language.',
         },
       ],
       keyTerms: [
@@ -878,7 +878,7 @@ export const aiConcepts = [
       sections: [
         {
           title: 'What It Is',
-          content: 'Multimodal AI refers to models that can process and/or generate more than one type of data (modality). A "modality" is a type of information: text, images, audio, video, code, 3D models, etc. Traditional AI models were unimodal — a language model only handled text, an image classifier only handled images. Multimodal models can take a photo and describe it, listen to audio and transcribe it, or generate an image from a text description. The most advanced models like GPT-4o and Gemini handle text, images, audio, and video in a single conversation.',
+          content: 'Multimodal AI refers to models that can process and/or generate more than one type of data (modality). A "modality" is a type of information: text, images, audio, video, code, 3D models, etc. Traditional AI models were unimodal — a language model only handled text, an image classifier only handled images. Multimodal models can take a photo and describe it, listen to audio and transcribe it, or generate an image from a text description. The most advanced models like GPT-5.2, Claude, and Gemini handle text, images, audio, and video in a single conversation.',
         },
         {
           title: 'How It Works',
@@ -886,7 +886,7 @@ export const aiConcepts = [
         },
         {
           title: 'Current Capabilities',
-          content: 'Vision-language models (GPT-4V, Claude, Gemini) analyze images, charts, documents, and screenshots while reasoning about them in text. Text-to-image models (DALL-E, Midjourney) generate images from descriptions. Speech models (Whisper, GPT-4o voice) handle real-time voice conversations. Some models now handle video understanding and generation. The frontier is true omni-modal models that seamlessly combine all modalities in real-time — having a voice conversation while sharing your screen and receiving visual responses.',
+          content: 'Vision-language models (GPT-5.2, Claude, Gemini) analyze images, charts, documents, and screenshots while reasoning about them in text. Text-to-image models (DALL-E, Midjourney) generate images from descriptions. Speech models (Whisper, GPT voice) handle real-time voice conversations. Some models now handle video understanding and generation. The frontier is true omni-modal models that seamlessly combine all modalities in real-time — having a voice conversation while sharing your screen and receiving visual responses.',
         },
       ],
       keyTerms: [
@@ -1180,15 +1180,15 @@ export const aiProducts = [
   {
     id: 'openai',
     company: 'OpenAI',
-    products: 'ChatGPT, GPT-4o, DALL-E, Sora',
+    products: 'ChatGPT, GPT-5.2, DALL-E, Sora',
     logo: '🟢',
     color: '#10a37f',
     type: 'LLM · Image Gen · Video Gen',
-    brief: 'The company behind ChatGPT — the world\'s most used AI chatbot — plus GPT-4o for reasoning, DALL-E for images, and Sora for video generation.',
+    brief: 'The company behind ChatGPT — the world\'s most used AI chatbot — plus GPT-5.2 for reasoning, DALL-E for images, and Sora for video generation.',
     userTypes: ['marketer', 'developer', 'creative'],
     transformation: {
       marketer: 'Draft campaign copy with ChatGPT, generate ad visuals with DALL-E, and produce promo videos with Sora — completing in hours what took weeks.',
-      developer: 'Use GPT-4o to generate, debug, and explain code, rapidly prototyping applications with conversational AI assistance.',
+      developer: 'Use GPT-5.2 to generate, debug, and explain code, rapidly prototyping applications with conversational AI assistance.',
       creative: 'Generate concept art, storyboards, and short video clips from text descriptions, accelerating the creative ideation pipeline.',
     },
   },
@@ -1780,7 +1780,7 @@ export const aiProducts = [
   {
     id: 'xai',
     company: 'xAI',
-    products: 'Grok, Grok-2, PromptIDE',
+    products: 'Grok, Grok-4, PromptIDE',
     logo: '🅧',
     color: '#1d9bf0',
     type: 'LLM · Real-Time AI',

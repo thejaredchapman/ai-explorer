@@ -92,18 +92,23 @@ export default function Hero({ onNavigate }) {
             <span className="hero-flow-label">Compare Models</span>
           </div>
           <span className="hero-flow-arrow">&rarr;</span>
-          <div className="hero-flow-step" onClick={() => onNavigate('products')}>
+          <div className="hero-flow-step" onClick={() => onNavigate('prompt-engineering')}>
             <span className="hero-flow-num">3</span>
+            <span className="hero-flow-label">Master Prompting</span>
+          </div>
+          <span className="hero-flow-arrow">&rarr;</span>
+          <div className="hero-flow-step" onClick={() => onNavigate('products')}>
+            <span className="hero-flow-num">4</span>
             <span className="hero-flow-label">Explore Products</span>
           </div>
           <span className="hero-flow-arrow">&rarr;</span>
           <div className="hero-flow-step" onClick={() => onNavigate('code-assistants')}>
-            <span className="hero-flow-num">4</span>
+            <span className="hero-flow-num">5</span>
             <span className="hero-flow-label">Pick Tools</span>
           </div>
           <span className="hero-flow-arrow">&rarr;</span>
           <div className="hero-flow-step" onClick={() => onNavigate('guides')}>
-            <span className="hero-flow-num">5</span>
+            <span className="hero-flow-num">6</span>
             <span className="hero-flow-label">Start Building</span>
           </div>
         </div>
@@ -117,6 +122,11 @@ export default function Hero({ onNavigate }) {
           <div className="hero-stat">
             <span className="hero-stat-num">24</span>
             <span className="hero-stat-label">LLM Models</span>
+          </div>
+          <div className="hero-stat-divider" />
+          <div className="hero-stat">
+            <span className="hero-stat-num">18</span>
+            <span className="hero-stat-label">Prompt Techniques</span>
           </div>
           <div className="hero-stat-divider" />
           <div className="hero-stat">

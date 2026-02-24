@@ -91,7 +91,7 @@ export default function ProductsExplorer() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <span className="section-badge">Step 3 — Explore Products</span>
+        <span className="section-badge">Step 5 — Explore Products</span>
         <h2>AI Products & Platforms</h2>
         <p>
           With model knowledge in hand, explore the 50 products and platforms built on top of them.

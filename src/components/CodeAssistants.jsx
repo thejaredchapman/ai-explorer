@@ -120,7 +120,7 @@ export default function CodeAssistants() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
-        <span className="section-badge">Developer Tools</span>
+        <span className="section-badge">Step 6 — Developer Tools</span>
         <h2>Code Assistants & AI Editors</h2>
         <p>
           AI-powered coding tools are transforming how software gets built. From IDE extensions to
