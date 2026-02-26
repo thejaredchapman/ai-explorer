@@ -997,6 +997,51 @@ export const aiConcepts = [
     },
   },
   {
+    id: 'hallucinations',
+    title: 'Hallucinations',
+    abbr: 'Halluc',
+    icon: '👻',
+    color: '#ef4444',
+    brief: 'When AI models confidently generate false, misleading, or nonsensical information that is not grounded in reality or training data.',
+    examples: ['Fake legal cases', 'Non-existent code libraries', 'Incorrect historical dates', 'Made-up quotes'],
+    keyInsight: 'LLMs are probabilistic, not deterministic — they prioritize fluency and coherence over factual accuracy.',
+    detail: {
+      headline: 'When the AI makes things up',
+      analogy: {
+        title: 'Think of it as...',
+        text: 'A smooth-talking improvisational actor. Their job is to keep the scene going and sound convincing, not necessarily to tell the truth. If you ask "Who is the CEO of Company X?" and they don\'t know, they might invent a plausible-sounding name just to keep the flow of the conversation. They aren\'t lying with malicious intent; they\'re just "completing the pattern" of a helpful answer.',
+      },
+      sections: [
+        {
+          title: 'What It Is',
+          content: 'In AI, a hallucination occurs when a Large Language Model (LLM) generates a response that looks factually correct but is actually false. Because LLMs are trained to predict the next word based on statistical likelihood, they can be remarkably creative — which is great for storytelling but dangerous for fact-retrieval. If a model doesn\'t "know" an answer, it often hallucinates a plausible-sounding one rather than admitting ignorance. This can range from subtle errors (wrong date) to complete fabrications (inventing a court case that never happened).',
+        },
+        {
+          title: 'Why It Happens',
+          content: 'LLMs don\'t have a database of facts; they have a web of statistical associations. When asked a question, they construct an answer token by token. If the model has seen "The capital of France is Paris" many times, the association is strong. But for obscure topics, the model might associate "Professor" with "University" and "Physics" and generate a fake bio for a real person. Data gaps, training data bias, and "exposure bias" (where models are trained to always answer rather than say "I don\'t know") all contribute to hallucinations.',
+        },
+        {
+          title: 'How to Fix It',
+          content: 'You can\'t eliminate hallucinations entirely, but you can minimize them. RAG (Retrieval-Augmented Generation) is the most effective defense — giving the model factual documents to read before answering. Grounding involves verifying model outputs against a trusted source. Prompt engineering techniques like "Chain-of-Thought" (asking the model to reason first) and "refusal" (instructing the model to say "I don\'t know" if unsure) also help. Setting a lower "temperature" (randomness) makes the model more deterministic and less likely to stray.',
+        },
+      ],
+      keyTerms: [
+        { term: 'Grounding', definition: 'Connecting the model\'s generation to verifiable sources of truth (like a search engine or database) to prevent fabrication.' },
+        { term: 'Confabulation', definition: 'Another term for hallucination — fluent but false generation. The model isn\'t "lying" (intent to deceive), just filling gaps.' },
+        { term: 'Citation', definition: 'Forcing the model to cite a specific source for its claims. If it can\'t find a source in the provided context, it shouldn\'t answer.' },
+        { term: 'Temperature', definition: 'A parameter controlling randomness. High temperature increases creativity but also the risk of hallucination.' },
+        { term: 'RAG', definition: 'Retrieval-Augmented Generation — the primary architectural pattern used to reduce hallucinations by providing context.' },
+      ],
+      applications: [
+        { field: 'Legal', example: 'Lawyers must verify every AI-generated citation, as models have famously invented non-existent court cases.' },
+        { field: 'Medicine', example: 'Medical AI systems use strict RAG pipelines and human verification to ensure diagnoses aren\'t hallucinated.' },
+        { field: 'Finance', example: 'Financial analysis tools cross-reference AI summaries with original documents to prevent made-up numbers.' },
+        { field: 'Education', example: 'Students are taught to treat AI as a "reasoning engine" rather than a "fact database" and to verify factual claims.' },
+      ],
+      bigPicture: 'Hallucination is the "dark side" of the same creativity that makes GenAI so powerful. The same mechanism that allows a model to write a fictional story (good hallucination) allows it to write a fake biography (bad hallucination). Solving this is the central challenge for enterprise AI adoption. As models get smarter and context windows get larger, hallucinations decrease, but human verification remains essential.',
+    },
+  },
+  {
     id: 'knowledgegraphs',
     title: 'Knowledge Graphs',
     abbr: 'KG',
@@ -1131,6 +1176,56 @@ export const aiConcepts = [
       bigPicture: 'Edge AI is essential for scenarios where latency, privacy, reliability, or bandwidth make cloud AI impractical. As models get more efficient and edge hardware gets more powerful, more AI will run locally. The future is hybrid: edge for speed and privacy, cloud for complex reasoning and training. Understanding Edge AI is key to understanding how AI actually reaches billions of devices.',
     },
   },
+  {
+    id: 'anthropicskills',
+    title: 'Anthropic Skills',
+    abbr: 'Skills',
+    icon: '⚡',
+    color: '#d4a27f',
+    brief: 'The specialized capabilities Anthropic has built into Claude — from advanced reasoning and coding to safety-first design and tool use — that define how Claude interacts with the world and solves real problems.',
+    examples: ['Multi-file code generation', 'Constitutional AI safety', 'Long-context document analysis', 'Agentic tool use and MCP'],
+    keyInsight: 'Anthropic doesn\'t just build a chatbot — they engineer distinct, measurable skills into Claude that combine safety research with practical capability.',
+    detail: {
+      headline: 'The capabilities that make Claude uniquely useful',
+      analogy: {
+        title: 'Think of it as...',
+        text: 'A Swiss Army knife where each tool was individually designed by a specialist. The blade was forged by a bladesmith, the screwdriver engineered by a toolmaker, the scissors refined by a tailor. Anthropic Skills are like that — each capability (reasoning, coding, safety, tool use) is a distinct discipline that Anthropic has invested deep research into, then integrated into a single coherent model.',
+      },
+      sections: [
+        {
+          title: 'What They Are',
+          content: 'Anthropic Skills refer to the core competencies that Anthropic has deliberately engineered into Claude through research, training, and alignment techniques. Unlike general-purpose language ability, these are targeted capabilities that Anthropic has specifically invested in: advanced reasoning and chain-of-thought thinking, code generation and software engineering, constitutional AI for safety and harmlessness, extended thinking for complex problems, tool use and function calling, long-context understanding (up to 200K tokens), and agentic workflows where Claude can plan, execute, and iterate autonomously. Each skill represents years of focused research — they\'re not emergent accidents but intentional engineering decisions.',
+        },
+        {
+          title: 'Core Skill Categories',
+          content: 'Reasoning & Analysis: Claude excels at multi-step logical reasoning, breaking complex problems into parts, and showing its work through extended thinking. Coding & Software Engineering: Claude Code can generate, debug, refactor, and architect entire codebases — handling multi-file changes, writing tests, and navigating complex projects. Safety & Alignment: Constitutional AI (CAI) trains Claude to be helpful, harmless, and honest without relying solely on human feedback. RLHF and RLAIF refine behavior to avoid harmful outputs while remaining maximally useful. Tool Use & Agentic Skills: Claude can call external tools, APIs, and services through function calling and the Model Context Protocol (MCP). It can browse the web, execute code, read files, and chain actions together. Long-Context Mastery: With a 200K token context window, Claude can analyze entire codebases, legal documents, or research papers in a single pass — maintaining coherence across vast amounts of information.',
+        },
+        {
+          title: 'How They\'re Built',
+          content: 'Anthropic\'s skills emerge from a layered training process. Pre-training on massive text corpora gives Claude broad language understanding. Constitutional AI provides a set of principles (a "constitution") that guides Claude\'s behavior — the model critiques and revises its own responses to align with these principles. RLHF (Reinforcement Learning from Human Feedback) fine-tunes Claude using human preference data. Specialized training on code, math, and reasoning benchmarks sharpens domain-specific performance. Red-teaming and safety evaluations stress-test Claude\'s boundaries. The result is a model that doesn\'t just generate text — it reasons, codes, follows instructions precisely, uses tools, and self-corrects, all while maintaining safety guardrails.',
+        },
+        {
+          title: 'Real-World Impact',
+          content: 'Anthropic Skills have transformed how people work across industries. Software teams use Claude Code to ship features faster — generating code, writing tests, and handling complex refactors that previously took days. Researchers use Claude\'s long-context ability to synthesize entire fields of literature in minutes. Legal teams analyze contracts and regulatory documents with precision. Enterprise customers deploy Claude for knowledge management, customer support, and document processing with confidence in safety guardrails. The agentic capabilities (tool use, MCP, autonomous workflows) are enabling a new generation of AI applications where Claude doesn\'t just answer questions — it takes actions, integrates with systems, and completes multi-step tasks end-to-end.',
+        },
+      ],
+      keyTerms: [
+        { term: 'Constitutional AI (CAI)', definition: 'Anthropic\'s alignment technique where Claude is trained to follow a set of principles, self-critiquing its own outputs to be helpful, harmless, and honest.' },
+        { term: 'Extended Thinking', definition: 'Claude\'s ability to reason through complex problems step-by-step in a visible chain-of-thought before producing a final answer.' },
+        { term: 'Claude Code', definition: 'Anthropic\'s CLI tool that gives Claude direct access to your codebase — enabling code generation, debugging, refactoring, and agentic software development.' },
+        { term: 'Model Context Protocol (MCP)', definition: 'An open standard created by Anthropic that lets Claude connect to external tools, databases, and services through a universal protocol.' },
+        { term: 'RLHF / RLAIF', definition: 'Reinforcement Learning from Human/AI Feedback — techniques used to align Claude\'s behavior with human values and preferences.' },
+        { term: 'Agentic Workflows', definition: 'Patterns where Claude autonomously plans, executes, and iterates on multi-step tasks — using tools, reading files, running code, and adapting to results.' },
+      ],
+      applications: [
+        { field: 'Software Engineering', example: 'Claude Code handles multi-file refactors, generates test suites, debugs production issues, and architects new features — acting as a senior developer pair programmer.' },
+        { field: 'Research & Science', example: 'Researchers use Claude\'s long-context and reasoning skills to analyze papers, generate hypotheses, and synthesize findings across hundreds of sources.' },
+        { field: 'Enterprise & Legal', example: 'Organizations deploy Claude for contract analysis, compliance review, and knowledge base management — with safety guardrails that enterprise trust requirements demand.' },
+        { field: 'AI Development', example: 'Developers use Claude\'s tool use and MCP skills to build AI-powered applications that connect to databases, APIs, and external services seamlessly.' },
+      ],
+      bigPicture: 'Anthropic\'s approach is unique in the AI industry: they advance capability and safety together, treating them as complementary rather than competing goals. Each skill Claude gains is accompanied by alignment research to ensure it\'s deployed responsibly. The impact is a model that enterprises trust for sensitive work, developers rely on for complex engineering, and researchers use for deep analysis. As Claude\'s skills expand — better reasoning, more tool integrations, longer context, autonomous agents — the gap between "AI assistant" and "AI collaborator" continues to close. Anthropic Skills represent the practical manifestation of Anthropic\'s founding mission: building AI systems that are both maximally capable and fundamentally safe.',
+    },
+  },
 ];
 
 // ── Nested Relationship (for the interactive diagram) ──
@@ -1161,6 +1256,13 @@ export const conceptRelationships = [
   { from: 'rag', to: 'knowledgegraphs', label: 'enhanced by' },
   { from: 'ml', to: 'syntheticdata', label: 'trained on' },
   { from: 'dl', to: 'edgeai', label: 'deployed to' },
+  { from: 'llm', to: 'hallucinations', label: 'prone to' },
+  { from: 'rag', to: 'hallucinations', label: 'mitigates' },
+  { from: 'responsibleai', to: 'hallucinations', label: 'addresses' },
+  { from: 'llm', to: 'anthropicskills', label: 'realized by' },
+  { from: 'anthropicskills', to: 'mcp', label: 'enables' },
+  { from: 'anthropicskills', to: 'agents', label: 'powers' },
+  { from: 'responsibleai', to: 'anthropicskills', label: 'guides' },
 ];
 
 // ── User Types ──
@@ -2141,5 +2243,33 @@ export const conceptResources = {
       { title: 'LangChain Tool Calling', url: 'https://python.langchain.com/docs/concepts/tool_calling/', description: 'LangChain\'s tool use abstraction' },
     ],
     communities: [],
+  },
+  hallucinations: {
+    papers: [
+      { title: 'Survey of Hallucination in Natural Language Generation (2023)', url: 'https://arxiv.org/abs/2202.03629', description: 'Comprehensive overview of hallucination types and mitigation strategies' },
+      { title: 'Siren\'s Song in the AI Ocean: A Survey on Hallucination in LLMs (2023)', url: 'https://arxiv.org/abs/2309.01219', description: 'Deep dive into why hallucinations happen and how to detect them' },
+    ],
+    documentation: [
+      { title: 'Google Cloud: AI Hallucinations', url: 'https://cloud.google.com/discover/what-are-ai-hallucinations', description: 'Business-focused explanation of hallucinations' },
+      { title: 'IBM: What are AI Hallucinations?', url: 'https://www.ibm.com/topics/ai-hallucinations', description: 'Detailed guide on causes and prevention' },
+    ],
+    communities: [],
+  },
+  anthropicskills: {
+    papers: [
+      { title: 'Constitutional AI: Harmlessness from AI Feedback (2022)', url: 'https://arxiv.org/abs/2212.08073', description: 'Anthropic\'s foundational paper on training AI to be helpful, harmless, and honest' },
+      { title: 'The Claude Model Card and Evaluations', url: 'https://docs.anthropic.com/en/docs/about-claude/models', description: 'Detailed breakdown of Claude\'s capabilities, benchmarks, and model family' },
+      { title: 'Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet (2024)', url: 'https://transformer-circuits.pub/2024/scaling-monosemanticity/', description: 'Anthropic\'s breakthrough research on understanding what happens inside neural networks' },
+    ],
+    documentation: [
+      { title: 'Anthropic Documentation', url: 'https://docs.anthropic.com/', description: 'Official docs covering Claude\'s capabilities, API, and best practices' },
+      { title: 'Claude Code Documentation', url: 'https://docs.anthropic.com/en/docs/claude-code', description: 'Guide to using Claude Code for agentic software development' },
+      { title: 'Anthropic Tool Use Guide', url: 'https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview', description: 'How to use Claude\'s function calling and tool use capabilities' },
+      { title: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/', description: 'The open standard Anthropic created for connecting AI to external tools and data' },
+    ],
+    communities: [
+      { title: 'Anthropic Community Forum', url: 'https://community.anthropic.com/', description: 'Official Anthropic community for discussions, feedback, and support' },
+      { title: 'r/ClaudeAI', url: 'https://www.reddit.com/r/ClaudeAI/', description: 'Reddit community for Claude users and developers' },
+    ],
   },
 };
