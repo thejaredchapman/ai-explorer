@@ -1226,6 +1226,51 @@ export const aiConcepts = [
       bigPicture: 'Anthropic\'s approach is unique in the AI industry: they advance capability and safety together, treating them as complementary rather than competing goals. Each skill Claude gains is accompanied by alignment research to ensure it\'s deployed responsibly. The impact is a model that enterprises trust for sensitive work, developers rely on for complex engineering, and researchers use for deep analysis. As Claude\'s skills expand — better reasoning, more tool integrations, longer context, autonomous agents — the gap between "AI assistant" and "AI collaborator" continues to close. Anthropic Skills represent the practical manifestation of Anthropic\'s founding mission: building AI systems that are both maximally capable and fundamentally safe.',
     },
   },
+  {
+    id: 'computeruse',
+    title: 'Computer Use',
+    abbr: 'CUA',
+    icon: '🖥️',
+    color: '#0d9488',
+    brief: 'AI systems that can see, understand, and interact with graphical user interfaces — clicking buttons, filling forms, navigating apps, and controlling a computer like a human user would.',
+    examples: ['AI browsing the web to research topics', 'Automating form filling across multiple apps', 'Testing software by interacting with the UI', 'AI assistants controlling desktop applications'],
+    keyInsight: 'Instead of needing an API for every tool, Computer Use lets AI interact with any software through the same interface humans use — the screen.',
+    detail: {
+      headline: 'AI that sees and controls your screen',
+      analogy: {
+        title: 'Think of it as...',
+        text: 'Traditional AI tool use is like talking to each app through a dedicated phone line (API). Computer Use is like sitting in front of the computer itself — the AI can see the screen, move the mouse, and type on the keyboard. It works with any app, even ones that were never designed for AI, because it uses the same universal interface humans do.',
+      },
+      sections: [
+        {
+          title: 'What It Is',
+          content: 'Computer Use (sometimes called GUI Agents or Computer-Using Agents) is the ability for AI to perceive and interact with graphical user interfaces. The AI takes screenshots of the screen, understands what\'s displayed (buttons, text fields, menus, content), decides what action to take, and executes it — clicking, typing, scrolling, or dragging. This lets AI work with any software application without needing a dedicated API integration. Both Anthropic (Claude) and Google (Gemini) have shipped computer use capabilities, and it\'s rapidly becoming a core feature of agentic AI systems.',
+        },
+        {
+          title: 'How It Works',
+          content: 'The system operates in a perception-action loop: (1) Take a screenshot of the current screen state, (2) The vision model analyzes the image to understand UI elements, text, and context, (3) The reasoning model decides the next action (click coordinates, type text, scroll, etc.), (4) The action is executed via system-level input simulation, (5) A new screenshot is taken and the loop continues. Advanced systems add safety layers — confirming before destructive actions, sandboxing execution, and maintaining audit logs of all actions taken.',
+        },
+        {
+          title: 'Why It Matters',
+          content: 'Most software in the world has no API. Legacy enterprise apps, desktop tools, government portals, and countless web applications can only be operated through their GUIs. Computer Use bridges this gap — AI can automate workflows across any application by interacting visually. This is especially powerful for enterprise automation (navigating internal tools), software testing (QA without writing test scripts), accessibility (helping users who struggle with complex interfaces), and research (AI that can browse, compare, and synthesize from any website).',
+        },
+      ],
+      keyTerms: [
+        { term: 'GUI Agent', definition: 'An AI agent that interacts with graphical user interfaces through vision and simulated input rather than APIs.' },
+        { term: 'Screenshot-Action Loop', definition: 'The core mechanism: take a screenshot, analyze it, decide an action, execute it, and repeat until the task is complete.' },
+        { term: 'Coordinate-Based Clicking', definition: 'The AI identifies pixel coordinates on screen where it should click, based on visual understanding of UI elements.' },
+        { term: 'Sandbox Environment', definition: 'An isolated virtual machine or container where AI safely performs computer use without risking the user\'s real system.' },
+        { term: 'Action Space', definition: 'The set of available actions: mouse click, type, scroll, key press, drag, screenshot — the "vocabulary" of computer interaction.' },
+      ],
+      applications: [
+        { field: 'Enterprise Automation', example: 'AI navigates legacy internal tools, CRMs, and ERP systems to complete routine tasks — no API needed, works with any existing software.' },
+        { field: 'Software Testing', example: 'AI agents perform end-to-end UI testing by actually clicking through the application like a real user, finding visual bugs and UX issues.' },
+        { field: 'Research & Data Collection', example: 'AI browses the web, navigates complex sites, fills out search forms, and compiles information from multiple sources autonomously.' },
+        { field: 'Accessibility', example: 'AI assistants help users interact with complex software by interpreting the interface and performing actions on their behalf.' },
+      ],
+      bigPicture: 'Computer Use represents a fundamental shift in how AI interacts with the digital world. Instead of requiring every tool to expose an API, AI can now work with any software through the universal interface of the screen. This dramatically expands what AI agents can automate. Anthropic\'s Claude, Google\'s Gemini, and others are investing heavily in this capability. Combined with MCP for API-native tools and traditional function calling, Computer Use completes the toolkit for truly autonomous AI agents that can operate across the entire software landscape.',
+    },
+  },
 ];
 
 // ── Nested Relationship (for the interactive diagram) ──
@@ -1263,6 +1308,10 @@ export const conceptRelationships = [
   { from: 'anthropicskills', to: 'mcp', label: 'enables' },
   { from: 'anthropicskills', to: 'agents', label: 'powers' },
   { from: 'responsibleai', to: 'anthropicskills', label: 'guides' },
+  { from: 'agents', to: 'computeruse', label: 'capability' },
+  { from: 'computeruse', to: 'mcp', label: 'complements' },
+  { from: 'multimodal', to: 'computeruse', label: 'enables' },
+  { from: 'cv', to: 'computeruse', label: 'powers' },
 ];
 
 // ── User Types ──
@@ -1492,16 +1541,18 @@ export const aiProducts = [
   {
     id: 'nvidia',
     company: 'NVIDIA',
-    products: 'NIM, AI Enterprise, NeMo',
+    products: 'Blackwell, Vera Rubin, NIM, Nemotron, Cosmos, DGX, NeMo, Dynamo, DLSS 5',
     logo: '💚',
     color: '#76b900',
-    type: 'AI Infrastructure · GPU Computing',
-    brief: 'Provides the foundational hardware (GPUs) and software powering most AI development worldwide. NIM offers optimized model deployment; AI Enterprise adds governance.',
-    userTypes: ['developer', 'enterprise', 'data-scientist'],
+    type: 'AI Infrastructure · GPU Computing · AI Models',
+    brief: 'The foundational hardware and software powering most AI development worldwide. From Blackwell and Vera Rubin GPUs to Nemotron open models, NIM microservices, Cosmos physical AI, and Dynamo inference — NVIDIA provides the full AI stack from silicon to software.',
+    userTypes: ['developer', 'enterprise', 'data-scientist', 'researcher', 'creative'],
     transformation: {
-      developer: 'Deploy optimized AI models with a single API call on GPU-accelerated infrastructure, achieving 10x faster inference than unoptimized setups.',
-      enterprise: 'Run AI workloads at scale with enterprise-grade security, support, and lifecycle management through AI Enterprise.',
-      'data-scientist': 'Train and fine-tune models on NVIDIA GPUs with optimized frameworks, leveraging hardware-software co-design for maximum performance.',
+      developer: 'Deploy optimized AI models with NIM microservices, build agentic workflows with NeMo, and run inference at scale with Dynamo — all on GPU-accelerated infrastructure.',
+      enterprise: 'Run AI factories at scale with DGX SuperPOD, AI Enterprise governance, and Vera Rubin rack-scale supercomputers purpose-built for agentic AI workloads.',
+      'data-scientist': 'Train and fine-tune models on Blackwell GPUs, leverage Nemotron open models for reasoning and coding, and use CUDA-X libraries for maximum performance.',
+      researcher: 'Access frontier open models through the Nemotron Coalition, run large-scale experiments on DGX Cloud, and explore physical AI with Cosmos world foundation models.',
+      creative: 'Experience DLSS 5 generative AI for photorealistic gaming graphics, create 3D worlds with Omniverse, and generate cinematic content with AI-powered creative tools.',
     },
   },
   {
@@ -2012,6 +2063,51 @@ export const aiProducts = [
       creative: 'Convert scripts to professional voiceovers in any language, clone your voice for consistent narration, and create audio content at scale.',
       enterprise: 'Produce training materials, presentations, and internal communications as professional audio without recording sessions.',
       researcher: 'Listen to papers and documents while multitasking, converting dense academic text into natural-sounding audio for on-the-go consumption.',
+    },
+  },
+  {
+    id: 'gamma',
+    company: 'Gamma',
+    products: 'Gamma AI, AI Presentations, AI Image Generation',
+    logo: '🟣',
+    color: '#8b5cf6',
+    type: 'AI Presentations & Design',
+    brief: 'AI-powered presentation and document creation platform. Generate polished slides, documents, and websites from a simple prompt — now with built-in AI image generation competing with Canva and Adobe.',
+    userTypes: ['creative', 'enterprise', 'marketer'],
+    transformation: {
+      creative: 'Generate stunning presentations and visual documents from text prompts, with AI image generation built in for custom visuals without leaving the platform.',
+      enterprise: 'Create professional pitch decks, reports, and internal docs in minutes instead of hours — with consistent branding and AI-powered design.',
+      marketer: 'Rapidly produce marketing decks, one-pagers, and campaign presentations with AI-generated visuals tailored to your brand.',
+    },
+  },
+  {
+    id: 'picsart',
+    company: 'Picsart',
+    products: 'Picsart AI, Agent Marketplace, AI Photo Editor',
+    logo: '🎨',
+    color: '#e91e63',
+    type: 'AI Photo & Video Editing · Agent Marketplace',
+    brief: 'AI-powered creative platform with photo and video editing tools used by 150M+ monthly users. Launched an AI Agent Marketplace where creators can hire specialized AI assistants for creative workflows.',
+    userTypes: ['creative', 'marketer', 'designer'],
+    transformation: {
+      creative: 'Edit photos and videos with AI-powered tools — background removal, style transfer, object generation — and hire AI agents from the marketplace for specialized tasks.',
+      marketer: 'Produce social media visuals, ad creatives, and marketing assets at scale using AI editing tools and agent-powered automation.',
+      designer: 'Accelerate design workflows with AI-powered editing, batch processing, and specialized AI agents for repetitive creative tasks.',
+    },
+  },
+  {
+    id: 'inception',
+    company: 'Inception Labs',
+    products: 'Mercury, Diffusion LLM',
+    logo: '💎',
+    color: '#0ea5e9',
+    type: 'AI Model Infrastructure · Diffusion LLM',
+    brief: 'Pioneering diffusion-based language models that generate text differently from traditional autoregressive LLMs. Mercury achieves 906 tokens/second — making it one of the fastest inference engines available — by applying diffusion model techniques to text generation.',
+    userTypes: ['developer', 'researcher', 'enterprise'],
+    transformation: {
+      developer: 'Build applications with ultra-fast AI inference — Mercury generates text at 906 tok/s, enabling real-time AI features that were previously too slow.',
+      researcher: 'Explore a fundamentally new approach to language modeling where diffusion processes replace autoregressive generation, opening new research directions.',
+      enterprise: 'Deploy AI at massive scale with dramatically lower latency and compute costs thanks to diffusion-based architecture.',
     },
   },
 ];

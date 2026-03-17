@@ -16,6 +16,7 @@ export const providers = [
   { id: 'meta', label: 'Meta', color: '#0668e1' },
   { id: 'xai', label: 'xAI', color: '#1d9bf0' },
   { id: 'mistral', label: 'Mistral', color: '#ff7000' },
+  { id: 'nvidia', label: 'NVIDIA', color: '#76b900' },
 ];
 
 export const timelineEvents = [
@@ -259,6 +260,54 @@ export const trainingTechnologies = [
     ],
     frameworks: ['PyTorch', 'Megablocks', 'vLLM'],
     relatedModels: ['Mixtral 8x7B', 'Mixtral 8x22B', 'Mistral Large'],
+  },
+  {
+    id: 'blackwell-architecture',
+    title: 'Blackwell GPU Architecture',
+    provider: 'nvidia',
+    color: '#76b900',
+    icon: '\u{1F4A0}',
+    summary: 'NVIDIA\'s Blackwell architecture (B200, GB200, GB300) is the GPU platform powering AI factories for the age of reasoning. It delivers massive improvements in training throughput and inference efficiency over the prior Hopper generation, enabling trillion-parameter model training.',
+    keyPoints: [
+      'Up to 4x faster AI training and 30x faster inference than Hopper H100 GPUs',
+      'GB200 NVL72 rack-scale system connects 72 GPUs as a single unified compute unit',
+      'Second-generation Transformer Engine with FP4 precision for efficient inference',
+      'NVLink 5th-gen provides 1.8TB/s GPU-to-GPU bandwidth for massive parallelism',
+    ],
+    frameworks: ['CUDA 13', 'TensorRT-LLM', 'NeMo', 'Dynamo'],
+    relatedModels: ['Nemotron Ultra 253B', 'Nemotron Super 49B', 'Llama 4'],
+  },
+  {
+    id: 'vera-rubin',
+    title: 'Vera Rubin Platform',
+    provider: 'nvidia',
+    color: '#76b900',
+    icon: '\u{1F680}',
+    summary: 'NVIDIA\'s next-generation AI platform after Blackwell, featuring seven new chips purpose-built for the age of agentic AI. Includes the Vera CPU — the first processor designed specifically for agentic AI workloads — delivering 2x efficiency and 50% faster performance.',
+    keyPoints: [
+      'Seven new chips in full production designed for scaling AI factories',
+      'Vera CPU is the first processor purpose-built for agentic AI workloads',
+      'Vera Rubin NVL72 serves as a rack-scale agentic AI supercomputer',
+      'BlueField-4 STX enables modular storage for long-context reasoning in agents',
+    ],
+    frameworks: ['CUDA-X', 'Dynamo', 'NeMo', 'OpenShell'],
+    relatedModels: ['Nemotron Ultra 253B', 'Future Nemotron models'],
+  },
+  {
+    id: 'nvidia-dynamo',
+    title: 'Dynamo Inference OS',
+    provider: 'nvidia',
+    color: '#76b900',
+    icon: '\u{26A1}',
+    summary: 'NVIDIA Dynamo is an open-source inference operating system for generative and agentic AI at scale. It orchestrates distributed multi-node inference across data centers, optimizing throughput, latency, and GPU utilization for production LLM serving.',
+    keyPoints: [
+      'Open-source inference OS for distributed multi-node LLM serving',
+      'Optimizes GPU utilization across data center scale deployments',
+      'Designed for both generative and agentic AI inference patterns',
+      'Integrates with NIM microservices for turnkey model deployment',
+    ],
+    frameworks: ['TensorRT-LLM', 'NIM', 'Triton', 'Kubernetes'],
+    relatedModels: ['Nemotron Ultra 253B', 'Nemotron Super 49B'],
   },
 ];
 
