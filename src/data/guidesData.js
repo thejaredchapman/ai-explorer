@@ -9,6 +9,7 @@ export const providers = [
   { id: 'openai', label: 'OpenAI', icon: '🟢', color: '#10a37f', description: 'GPT models — the most widely adopted LLM platform with a rich ecosystem.' },
   { id: 'google', label: 'Google Gemini', icon: '🔵', color: '#4285f4', description: 'Gemini models — strong multimodal capabilities with deep Google integration.' },
   { id: 'llama', label: 'Llama (Meta)', icon: '🦙', color: '#7c3aed', description: 'Open-source models you can run locally — full control, no API costs.' },
+  { id: 'langchain', label: 'LangChain', icon: '🦜', color: '#1c3c3c', description: 'LLM orchestration framework — chains, agents, RAG, and tool integration across any model.' },
 ];
 
 export const categories = [
@@ -861,6 +862,248 @@ print(output["choices"][0]["message"]["content"])
 # Q4_K_M: 70B model fits in ~40GB RAM (was 140GB at fp16)`,
       runCommand: 'python llama_06_quantize.py',
     },
+    // ═══════════════════════════════════════
+    // LANGCHAIN GUIDES
+    // ═══════════════════════════════════════
+    {
+      id: 'langchain-chains',
+      number: 'LC1',
+      title: 'Build Your First Chain with LangChain',
+      file: 'langchain_01_chains.py',
+      category: 'beginner',
+      provider: 'langchain',
+      model: 'Any LLM',
+      icon: '🔗',
+      color: '#1c3c3c',
+      description: 'Learn the core abstraction of LangChain — chains. Compose prompt templates, LLMs, and output parsers into reusable pipelines using the LangChain Expression Language (LCEL).',
+      concepts: ['LCEL pipes', 'PromptTemplate', 'Output parsers', 'Runnable chains'],
+      codePreview: `from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import ChatOpenAI
+
+# Build a chain with LCEL (LangChain Expression Language)
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful assistant that explains {topic} simply."),
+    ("human", "{question}"),
+])
+
+llm = ChatOpenAI(model="gpt-4.1")
+chain = prompt | llm | StrOutputParser()
+
+# Run the chain
+answer = chain.invoke({
+    "topic": "machine learning",
+    "question": "What is gradient descent?"
+})
+print(answer)`,
+      runCommand: 'python langchain_01_chains.py',
+    },
+    {
+      id: 'langchain-rag',
+      number: 'LC2',
+      title: 'RAG Pipeline with LangChain',
+      file: 'langchain_02_rag.py',
+      category: 'intermediate',
+      provider: 'langchain',
+      model: 'Any LLM + Embeddings',
+      icon: '📚',
+      color: '#1c3c3c',
+      description: 'Build a complete Retrieval-Augmented Generation pipeline. Load documents, split into chunks, embed into a vector store, and retrieve context for grounded answers.',
+      concepts: ['Document loaders', 'Text splitters', 'Vector stores', 'Retriever chains'],
+      codePreview: `from langchain_community.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+
+# Load and split documents
+docs = PyPDFLoader("handbook.pdf").load()
+chunks = RecursiveCharacterTextSplitter(
+    chunk_size=1000, chunk_overlap=200
+).split_documents(docs)
+
+# Embed and store
+vectorstore = Chroma.from_documents(chunks, OpenAIEmbeddings())
+retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+
+# RAG chain
+prompt = ChatPromptTemplate.from_template(
+    "Answer based on context:\\n{context}\\n\\nQuestion: {question}"
+)
+rag_chain = (
+    {"context": retriever, "question": RunnablePassthrough()}
+    | prompt | ChatOpenAI(model="gpt-4.1") | StrOutputParser()
+)
+print(rag_chain.invoke("What is the PTO policy?"))`,
+      runCommand: 'python langchain_02_rag.py',
+    },
+    {
+      id: 'langchain-agents',
+      number: 'LC3',
+      title: 'Tool-Calling Agents with LangChain',
+      file: 'langchain_03_agents.py',
+      category: 'intermediate',
+      provider: 'langchain',
+      model: 'Any tool-calling LLM',
+      icon: '🤖',
+      color: '#1c3c3c',
+      description: 'Create an agent that autonomously decides which tools to call. Uses LangChain\'s agent framework with custom tools, built-in search, and the agent executor loop.',
+      concepts: ['@tool decorator', 'create_tool_calling_agent', 'AgentExecutor', 'Tool schemas'],
+      codePreview: `from langchain_openai import ChatOpenAI
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.tools import tool
+
+@tool
+def search_web(query: str) -> str:
+    """Search the web for current information."""
+    return f"Results for: {query}..."
+
+@tool
+def calculator(expression: str) -> str:
+    """Evaluate a math expression."""
+    return str(eval(expression))
+
+llm = ChatOpenAI(model="gpt-4.1")
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful research assistant."),
+    ("human", "{input}"),
+    ("placeholder", "{agent_scratchpad}"),
+])
+
+agent = create_tool_calling_agent(llm, [search_web, calculator], prompt)
+executor = AgentExecutor(agent=agent, tools=[search_web, calculator])
+result = executor.invoke({"input": "What is 15% of the US population?"})
+print(result["output"])`,
+      runCommand: 'python langchain_03_agents.py',
+    },
+    {
+      id: 'langchain-structured',
+      number: 'LC4',
+      title: 'Structured Output with LangChain',
+      file: 'langchain_04_structured.py',
+      category: 'intermediate',
+      provider: 'langchain',
+      model: 'Any LLM',
+      icon: '📋',
+      color: '#1c3c3c',
+      description: 'Extract structured data from natural language using Pydantic models. Works with any LLM — LangChain handles schema conversion and validation automatically.',
+      concepts: ['with_structured_output', 'Pydantic models', 'Schema enforcement', 'Provider-agnostic'],
+      codePreview: `from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
+
+class JobPosting(BaseModel):
+    title: str = Field(description="Job title")
+    company: str = Field(description="Company name")
+    salary_min: int = Field(description="Minimum salary in USD")
+    salary_max: int = Field(description="Maximum salary in USD")
+    skills: list[str] = Field(description="Required skills")
+    remote: bool = Field(description="Whether remote work is available")
+
+llm = ChatOpenAI(model="gpt-4.1")
+structured_llm = llm.with_structured_output(JobPosting)
+
+posting = structured_llm.invoke(
+    "Senior Python dev at Acme Corp, 150-200k, "
+    "needs Python, AWS, Docker. Fully remote."
+)
+print(f"{posting.title} at {posting.company}")
+print(f"Salary: \${posting.salary_min:,}-\${posting.salary_max:,}")
+print(f"Skills: {', '.join(posting.skills)}")
+print(f"Remote: {posting.remote}")`,
+      runCommand: 'python langchain_04_structured.py',
+    },
+    {
+      id: 'langchain-memory',
+      number: 'LC5',
+      title: 'Conversation Memory & History',
+      file: 'langchain_05_memory.py',
+      category: 'intermediate',
+      provider: 'langchain',
+      model: 'Any LLM',
+      icon: '🧠',
+      color: '#1c3c3c',
+      description: 'Add persistent conversation memory to your chains. Manage chat history with different strategies — full history, summary memory, and token-window trimming.',
+      concepts: ['ChatMessageHistory', 'RunnableWithMessageHistory', 'Summary memory', 'Token trimming'],
+      codePreview: `from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.chat_history import InMemoryChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+
+store = {}
+
+def get_session_history(session_id: str):
+    if session_id not in store:
+        store[session_id] = InMemoryChatMessageHistory()
+    return store[session_id]
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful assistant."),
+    MessagesPlaceholder(variable_name="history"),
+    ("human", "{input}"),
+])
+
+chain = prompt | ChatOpenAI(model="gpt-4.1")
+
+# Wrap with message history — memory is automatic
+with_history = RunnableWithMessageHistory(
+    chain,
+    get_session_history,
+    input_messages_key="input",
+    history_messages_key="history",
+)
+
+# Each call remembers previous turns
+config = {"configurable": {"session_id": "user-123"}}
+with_history.invoke({"input": "My name is Alice"}, config=config)
+resp = with_history.invoke({"input": "What's my name?"}, config=config)
+print(resp.content)  # "Your name is Alice!"`,
+      runCommand: 'python langchain_05_memory.py',
+    },
+    {
+      id: 'langchain-multichain',
+      number: 'LC6',
+      title: 'Multi-Model Routing & Fallbacks',
+      file: 'langchain_06_routing.py',
+      category: 'advanced',
+      provider: 'langchain',
+      model: 'Multiple LLMs',
+      icon: '🔀',
+      color: '#1c3c3c',
+      description: 'Route requests to different models based on task complexity, add fallback chains for reliability, and run multiple models in parallel. LangChain\'s killer feature for production apps.',
+      concepts: ['RunnableBranch', 'with_fallbacks', 'RunnableParallel', 'Model routing'],
+      codePreview: `from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain_core.runnables import RunnableBranch, RunnableParallel
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+fast = ChatOpenAI(model="gpt-4.1-mini")
+smart = ChatAnthropic(model="claude-sonnet-4-6")
+
+# Fallback: if primary fails, use backup
+chain_with_fallback = smart.with_fallbacks([fast])
+
+# Route by complexity
+classifier = ChatOpenAI(model="gpt-4.1-mini")
+prompt = ChatPromptTemplate.from_template("{input}")
+
+router = RunnableBranch(
+    (lambda x: x["complexity"] == "high", prompt | smart | StrOutputParser()),
+    prompt | fast | StrOutputParser(),  # default: fast model
+)
+
+# Parallel: run multiple models simultaneously
+parallel = RunnableParallel(
+    claude=prompt | smart | StrOutputParser(),
+    gpt=prompt | fast | StrOutputParser(),
+)
+results = parallel.invoke({"input": "Explain recursion"})
+print(f"Claude: {results['claude'][:100]}...")
+print(f"GPT: {results['gpt'][:100]}...")`,
+      runCommand: 'python langchain_06_routing.py',
+    },
   ],
 };
 
@@ -869,4 +1112,5 @@ export const providerColors = {
   openai: '#10a37f',
   google: '#4285f4',
   llama: '#7c3aed',
+  langchain: '#1c3c3c',
 };
