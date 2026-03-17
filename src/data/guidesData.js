@@ -10,6 +10,7 @@ export const providers = [
   { id: 'google', label: 'Google Gemini', icon: '🔵', color: '#4285f4', description: 'Gemini models — strong multimodal capabilities with deep Google integration.' },
   { id: 'llama', label: 'Llama (Meta)', icon: '🦙', color: '#7c3aed', description: 'Open-source models you can run locally — full control, no API costs.' },
   { id: 'langchain', label: 'LangChain', icon: '🦜', color: '#1c3c3c', description: 'LLM orchestration framework — chains, agents, RAG, and tool integration across any model.' },
+  { id: 'langgraph', label: 'LangGraph', icon: '🕸️', color: '#0f766e', description: 'Stateful, multi-actor agent framework — graph-based workflows, cycles, persistence, and human-in-the-loop.' },
 ];
 
 export const categories = [
@@ -1104,6 +1105,296 @@ print(f"Claude: {results['claude'][:100]}...")
 print(f"GPT: {results['gpt'][:100]}...")`,
       runCommand: 'python langchain_06_routing.py',
     },
+
+    // ═══════════════════════════════════════
+    // LANGGRAPH GUIDES
+    // ═══════════════════════════════════════
+    {
+      id: 'langgraph-basics',
+      number: 'LG1',
+      title: 'Build Your First Graph with LangGraph',
+      file: 'langgraph_01_basics.py',
+      category: 'beginner',
+      provider: 'langgraph',
+      model: 'Any LLM',
+      icon: '🕸️',
+      color: '#0f766e',
+      description: 'Learn LangGraph\'s core concept — state graphs. Define nodes (functions), edges (transitions), and state to build workflows that go beyond simple linear chains.',
+      concepts: ['StateGraph', 'Nodes & edges', 'TypedDict state', 'Graph compilation'],
+      codePreview: `from langgraph.graph import StateGraph, START, END
+from typing import TypedDict
+
+# Define the state that flows through the graph
+class State(TypedDict):
+    question: str
+    answer: str
+
+# Define nodes — each is a function that transforms state
+def research(state: State) -> dict:
+    """Look up information about the question."""
+    return {"answer": f"Researched: {state['question']}"}
+
+def format_answer(state: State) -> dict:
+    """Format the research into a clean answer."""
+    return {"answer": f"Final: {state['answer']}"}
+
+# Build the graph
+graph = StateGraph(State)
+graph.add_node("research", research)
+graph.add_node("format", format_answer)
+graph.add_edge(START, "research")
+graph.add_edge("research", "format")
+graph.add_edge("format", END)
+
+app = graph.compile()
+result = app.invoke({"question": "What is LangGraph?"})
+print(result["answer"])`,
+      runCommand: 'python langgraph_01_basics.py',
+    },
+    {
+      id: 'langgraph-react-agent',
+      number: 'LG2',
+      title: 'ReAct Agent with LangGraph',
+      file: 'langgraph_02_react_agent.py',
+      category: 'intermediate',
+      provider: 'langgraph',
+      model: 'Any tool-calling LLM',
+      icon: '🤖',
+      color: '#0f766e',
+      description: 'Build a ReAct (Reason + Act) agent using LangGraph\'s prebuilt agent. The agent reasons about what to do, calls tools, observes results, and loops until the task is complete.',
+      concepts: ['create_react_agent', 'Tool integration', 'Agent loop', 'Prebuilt agents'],
+      codePreview: `from langgraph.prebuilt import create_react_agent
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import tool
+
+@tool
+def search(query: str) -> str:
+    """Search the web for information."""
+    return f"Top results for '{query}': AI is transforming..."
+
+@tool
+def calculator(expression: str) -> str:
+    """Evaluate a math expression."""
+    return str(eval(expression))
+
+llm = ChatOpenAI(model="gpt-4.1")
+
+# Create a ReAct agent — handles the reason/act loop
+agent = create_react_agent(llm, [search, calculator])
+
+# The agent decides which tools to call and when to stop
+result = agent.invoke({
+    "messages": [{"role": "user",
+        "content": "How many seconds are in 3.5 days?"}]
+})
+
+for msg in result["messages"]:
+    print(f"{msg.type}: {msg.content}")`,
+      runCommand: 'python langgraph_02_react_agent.py',
+    },
+    {
+      id: 'langgraph-conditional',
+      number: 'LG3',
+      title: 'Conditional Routing & Branching',
+      file: 'langgraph_03_conditional.py',
+      category: 'intermediate',
+      provider: 'langgraph',
+      model: 'Any LLM',
+      icon: '🔀',
+      color: '#0f766e',
+      description: 'Add decision points to your graph with conditional edges. Route to different nodes based on LLM output, state values, or custom logic — the core of dynamic workflows.',
+      concepts: ['Conditional edges', 'add_conditional_edges', 'Router functions', 'Dynamic flow'],
+      codePreview: `from langgraph.graph import StateGraph, START, END
+from langchain_openai import ChatOpenAI
+from typing import TypedDict, Literal
+
+class State(TypedDict):
+    query: str
+    category: str
+    response: str
+
+llm = ChatOpenAI(model="gpt-4.1-mini")
+
+def classify(state: State) -> dict:
+    """Classify the query into a category."""
+    result = llm.invoke(f"Classify as 'technical' or 'general': {state['query']}")
+    return {"category": result.content.strip().lower()}
+
+def handle_technical(state: State) -> dict:
+    resp = llm.invoke(f"Give a detailed technical answer: {state['query']}")
+    return {"response": resp.content}
+
+def handle_general(state: State) -> dict:
+    resp = llm.invoke(f"Give a simple, friendly answer: {state['query']}")
+    return {"response": resp.content}
+
+# Route based on classification
+def route(state: State) -> Literal["technical", "general"]:
+    return "technical" if "technical" in state["category"] else "general"
+
+graph = StateGraph(State)
+graph.add_node("classify", classify)
+graph.add_node("technical", handle_technical)
+graph.add_node("general", handle_general)
+graph.add_edge(START, "classify")
+graph.add_conditional_edges("classify", route)
+graph.add_edge("technical", END)
+graph.add_edge("general", END)
+
+app = graph.compile()
+result = app.invoke({"query": "How does TCP/IP work?"})
+print(result["response"])`,
+      runCommand: 'python langgraph_03_conditional.py',
+    },
+    {
+      id: 'langgraph-persistence',
+      number: 'LG4',
+      title: 'Persistence & Checkpointing',
+      file: 'langgraph_04_persistence.py',
+      category: 'intermediate',
+      provider: 'langgraph',
+      model: 'Any LLM',
+      icon: '💾',
+      color: '#0f766e',
+      description: 'Add memory to your graphs with checkpointing. Persist conversation state across sessions, resume interrupted workflows, and build multi-session chatbots with thread-level history.',
+      concepts: ['MemorySaver', 'Thread IDs', 'Checkpointing', 'State persistence'],
+      codePreview: `from langgraph.graph import StateGraph, START, END, MessagesState
+from langgraph.checkpoint.memory import MemorySaver
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4.1")
+
+# Use MessagesState for automatic message list management
+def chatbot(state: MessagesState) -> dict:
+    response = llm.invoke(state["messages"])
+    return {"messages": [response]}
+
+graph = StateGraph(MessagesState)
+graph.add_node("chatbot", chatbot)
+graph.add_edge(START, "chatbot")
+graph.add_edge("chatbot", END)
+
+# Add persistence — state is saved after every node
+memory = MemorySaver()
+app = graph.compile(checkpointer=memory)
+
+# Thread 1: start a conversation
+config = {"configurable": {"thread_id": "user-123"}}
+app.invoke({"messages": [{"role": "user", "content": "I'm Alice"}]}, config)
+
+# Same thread — the bot remembers previous messages
+result = app.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]}, config
+)
+print(result["messages"][-1].content)  # "Your name is Alice!"`,
+      runCommand: 'python langgraph_04_persistence.py',
+    },
+    {
+      id: 'langgraph-hitl',
+      number: 'LG5',
+      title: 'Human-in-the-Loop Approval',
+      file: 'langgraph_05_hitl.py',
+      category: 'advanced',
+      provider: 'langgraph',
+      model: 'Any LLM',
+      icon: '🙋',
+      color: '#0f766e',
+      description: 'Pause graph execution to get human approval before critical actions. Use interrupt points to review tool calls, edit state, then resume — essential for safe agentic workflows.',
+      concepts: ['interrupt_before', 'Human review', 'State editing', 'Resumption'],
+      codePreview: `from langgraph.graph import StateGraph, START, END, MessagesState
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.prebuilt import create_react_agent, ToolNode
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import tool
+
+@tool
+def send_email(to: str, subject: str, body: str) -> str:
+    """Send an email (requires human approval)."""
+    return f"Email sent to {to}: {subject}"
+
+llm = ChatOpenAI(model="gpt-4.1")
+tools = [send_email]
+
+# Create agent with interrupt BEFORE tool execution
+agent = create_react_agent(
+    llm, tools,
+    checkpointer=MemorySaver(),
+    interrupt_before=["tools"],  # Pause before running tools
+)
+
+config = {"configurable": {"thread_id": "email-1"}}
+
+# Agent plans to send email — but pauses for approval
+result = agent.invoke(
+    {"messages": [{"role": "user",
+        "content": "Email bob@co.com about the meeting at 3pm"}]},
+    config,
+)
+print("Agent wants to call:", result["messages"][-1].tool_calls)
+
+# Human approves → resume execution
+result = agent.invoke(None, config)  # Continue from checkpoint
+print(result["messages"][-1].content)`,
+      runCommand: 'python langgraph_05_hitl.py',
+    },
+    {
+      id: 'langgraph-multi-agent',
+      number: 'LG6',
+      title: 'Multi-Agent Collaboration',
+      file: 'langgraph_06_multi_agent.py',
+      category: 'advanced',
+      provider: 'langgraph',
+      model: 'Any LLM',
+      icon: '👥',
+      color: '#0f766e',
+      description: 'Build a team of specialized agents that collaborate on tasks. A supervisor routes work to researcher, coder, and reviewer agents — each with their own tools and prompts.',
+      concepts: ['Supervisor pattern', 'Agent handoff', 'Specialized sub-agents', 'Collaborative workflows'],
+      codePreview: `from langgraph.graph import StateGraph, START, END, MessagesState
+from langchain_openai import ChatOpenAI
+from typing import Literal
+
+llm = ChatOpenAI(model="gpt-4.1")
+
+def supervisor(state: MessagesState) -> dict:
+    """Route tasks to the right specialist agent."""
+    response = llm.invoke([
+        {"role": "system", "content":
+         "Route to 'researcher', 'coder', or 'FINISH'."},
+        *state["messages"],
+    ])
+    return {"messages": [response]}
+
+def researcher(state: MessagesState) -> dict:
+    resp = llm.invoke([
+        {"role": "system", "content": "You are a research specialist."},
+        *state["messages"],
+    ])
+    return {"messages": [resp]}
+
+def coder(state: MessagesState) -> dict:
+    resp = llm.invoke([
+        {"role": "system", "content": "You are an expert programmer."},
+        *state["messages"],
+    ])
+    return {"messages": [resp]}
+
+def route(state: MessagesState) -> Literal["researcher", "coder", "__end__"]:
+    last = state["messages"][-1].content.lower()
+    if "researcher" in last: return "researcher"
+    if "coder" in last: return "coder"
+    return "__end__"
+
+graph = StateGraph(MessagesState)
+graph.add_node("supervisor", supervisor)
+graph.add_node("researcher", researcher)
+graph.add_node("coder", coder)
+graph.add_edge(START, "supervisor")
+graph.add_conditional_edges("supervisor", route)
+graph.add_edge("researcher", "supervisor")  # Report back
+graph.add_edge("coder", "supervisor")       # Report back
+app = graph.compile()`,
+      runCommand: 'python langgraph_06_multi_agent.py',
+    },
   ],
 };
 
@@ -1113,4 +1404,5 @@ export const providerColors = {
   google: '#4285f4',
   llama: '#7c3aed',
   langchain: '#1c3c3c',
+  langgraph: '#0f766e',
 };
