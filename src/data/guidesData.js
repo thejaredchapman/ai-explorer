@@ -11,6 +11,7 @@ export const providers = [
   { id: 'llama', label: 'Llama (Meta)', icon: '🦙', color: '#7c3aed', description: 'Open-source models you can run locally — full control, no API costs.' },
   { id: 'langchain', label: 'LangChain', icon: '🦜', color: '#1c3c3c', description: 'LLM orchestration framework — chains, agents, RAG, and tool integration across any model.' },
   { id: 'langgraph', label: 'LangGraph', icon: '🕸️', color: '#0f766e', description: 'Stateful, multi-actor agent framework — graph-based workflows, cycles, persistence, and human-in-the-loop.' },
+  { id: 'crewai', label: 'CrewAI', icon: '👷', color: '#e63946', description: 'Multi-agent orchestration — define roles, goals, and tasks for crews of AI agents that collaborate autonomously.' },
 ];
 
 export const categories = [
@@ -1395,6 +1396,324 @@ graph.add_edge("coder", "supervisor")       # Report back
 app = graph.compile()`,
       runCommand: 'python langgraph_06_multi_agent.py',
     },
+
+    // ═══════════════════════════════════════
+    // CREWAI GUIDES
+    // ═══════════════════════════════════════
+    {
+      id: 'crewai-basics',
+      number: 'CR1',
+      title: 'Build Your First Crew with CrewAI',
+      file: 'crewai_01_basics.py',
+      category: 'beginner',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '👷',
+      color: '#e63946',
+      description: 'Learn CrewAI\'s core concepts — agents, tasks, and crews. Define agents with roles and goals, assign them tasks, and let the crew collaborate to produce results.',
+      concepts: ['Agent roles', 'Task definitions', 'Crew assembly', 'Sequential process'],
+      codePreview: `from crewai import Agent, Task, Crew
+
+# Define agents with roles and goals
+researcher = Agent(
+    role="Senior Research Analyst",
+    goal="Find the latest AI trends and breakthroughs",
+    backstory="You are an expert analyst at a top tech firm.",
+    verbose=True,
+)
+
+writer = Agent(
+    role="Tech Content Writer",
+    goal="Write engaging articles about AI discoveries",
+    backstory="You are a skilled writer for a major tech blog.",
+    verbose=True,
+)
+
+# Define tasks and assign to agents
+research_task = Task(
+    description="Research the top 3 AI trends in 2026.",
+    expected_output="A detailed report with key findings.",
+    agent=researcher,
+)
+
+write_task = Task(
+    description="Write a blog post based on the research.",
+    expected_output="A polished 500-word blog post.",
+    agent=writer,
+)
+
+# Assemble the crew and kick off
+crew = Crew(agents=[researcher, writer], tasks=[research_task, write_task])
+result = crew.kickoff()
+print(result)`,
+      runCommand: 'python crewai_01_basics.py',
+    },
+    {
+      id: 'crewai-tools',
+      number: 'CR2',
+      title: 'Custom Tools for CrewAI Agents',
+      file: 'crewai_02_tools.py',
+      category: 'intermediate',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '🔧',
+      color: '#e63946',
+      description: 'Give your agents superpowers with custom tools. Use CrewAI\'s built-in tools for web search and file I/O, or create your own with the @tool decorator.',
+      concepts: ['@tool decorator', 'Built-in tools', 'Tool assignment', 'SerperDevTool'],
+      codePreview: `from crewai import Agent, Task, Crew
+from crewai.tools import tool
+from crewai_tools import SerperDevTool, FileReadTool
+
+# Built-in tools
+search_tool = SerperDevTool()
+file_tool = FileReadTool()
+
+# Custom tool with the @tool decorator
+@tool("Database Lookup")
+def db_lookup(query: str) -> str:
+    """Search the internal company database."""
+    # Your database logic here
+    return f"Found 3 records matching '{query}'"
+
+# Agent with multiple tools
+analyst = Agent(
+    role="Data Analyst",
+    goal="Answer questions using all available data sources",
+    backstory="You combine web research with internal data.",
+    tools=[search_tool, file_tool, db_lookup],
+    verbose=True,
+)
+
+task = Task(
+    description="Compare our Q4 revenue with industry benchmarks.",
+    expected_output="A comparison table with insights.",
+    agent=analyst,
+)
+
+crew = Crew(agents=[analyst], tasks=[task])
+result = crew.kickoff()
+print(result)`,
+      runCommand: 'python crewai_02_tools.py',
+    },
+    {
+      id: 'crewai-hierarchical',
+      number: 'CR3',
+      title: 'Hierarchical Crew with a Manager',
+      file: 'crewai_03_hierarchical.py',
+      category: 'intermediate',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '👔',
+      color: '#e63946',
+      description: 'Switch from sequential to hierarchical process — a manager agent automatically delegates tasks, reviews output, and coordinates the crew like a real team lead.',
+      concepts: ['Hierarchical process', 'Manager LLM', 'Delegation', 'Task review'],
+      codePreview: `from crewai import Agent, Task, Crew, Process
+from langchain_openai import ChatOpenAI
+
+researcher = Agent(
+    role="Researcher",
+    goal="Gather comprehensive data on the topic",
+    backstory="Expert at finding and synthesizing information.",
+    allow_delegation=False,
+)
+
+analyst = Agent(
+    role="Data Analyst",
+    goal="Analyze data and extract actionable insights",
+    backstory="Skilled at finding patterns in complex data.",
+    allow_delegation=False,
+)
+
+writer = Agent(
+    role="Report Writer",
+    goal="Create clear, executive-ready reports",
+    backstory="Former McKinsey consultant with sharp writing.",
+    allow_delegation=False,
+)
+
+tasks = [
+    Task(description="Research market size for AI agents in 2026.",
+         expected_output="Raw data and sources."),
+    Task(description="Analyze the data for growth trends.",
+         expected_output="Key insights and projections."),
+    Task(description="Write a 1-page executive summary.",
+         expected_output="Polished executive brief."),
+]
+
+# Hierarchical: a manager LLM coordinates the agents
+crew = Crew(
+    agents=[researcher, analyst, writer],
+    tasks=tasks,
+    process=Process.hierarchical,
+    manager_llm=ChatOpenAI(model="gpt-4.1"),
+    verbose=True,
+)
+
+result = crew.kickoff()
+print(result)`,
+      runCommand: 'python crewai_03_hierarchical.py',
+    },
+    {
+      id: 'crewai-memory',
+      number: 'CR4',
+      title: 'Crew Memory & Knowledge Sharing',
+      file: 'crewai_04_memory.py',
+      category: 'intermediate',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '🧠',
+      color: '#e63946',
+      description: 'Enable short-term, long-term, and entity memory so agents learn from past interactions. Crews remember context across tasks and even across multiple runs.',
+      concepts: ['Short-term memory', 'Long-term memory', 'Entity memory', 'Cross-task context'],
+      codePreview: `from crewai import Agent, Task, Crew
+
+researcher = Agent(
+    role="Research Assistant",
+    goal="Build knowledge over multiple research sessions",
+    backstory="You learn and remember across conversations.",
+    memory=True,  # Enable agent-level memory
+)
+
+analyst = Agent(
+    role="Analyst",
+    goal="Use accumulated research to provide deeper insights",
+    backstory="You build on previous findings.",
+    memory=True,
+)
+
+task1 = Task(
+    description="Research the history of transformer models.",
+    expected_output="Timeline of key transformer milestones.",
+    agent=researcher,
+)
+
+task2 = Task(
+    description="Based on the research, predict next breakthroughs.",
+    expected_output="Top 3 predicted breakthroughs with reasoning.",
+    agent=analyst,
+)
+
+# Enable crew-level memory for cross-task knowledge sharing
+crew = Crew(
+    agents=[researcher, analyst],
+    tasks=[task1, task2],
+    memory=True,        # Short-term: within this run
+    long_term_memory=True,  # Persists across runs
+    entity_memory=True,     # Tracks people, orgs, concepts
+    verbose=True,
+)
+
+result = crew.kickoff()
+print(result)`,
+      runCommand: 'python crewai_04_memory.py',
+    },
+    {
+      id: 'crewai-structured',
+      number: 'CR5',
+      title: 'Structured Output with CrewAI',
+      file: 'crewai_05_structured.py',
+      category: 'intermediate',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '📋',
+      color: '#e63946',
+      description: 'Get structured Pydantic objects as crew output instead of raw text. Define output schemas on tasks to guarantee the format of agent responses.',
+      concepts: ['output_pydantic', 'Task output types', 'Pydantic models', 'Schema validation'],
+      codePreview: `from crewai import Agent, Task, Crew
+from pydantic import BaseModel, Field
+
+# Define structured output schema
+class MarketReport(BaseModel):
+    industry: str = Field(description="Industry analyzed")
+    market_size: str = Field(description="Total market size")
+    growth_rate: float = Field(description="Annual growth rate %")
+    top_players: list[str] = Field(description="Top 5 companies")
+    risks: list[str] = Field(description="Key market risks")
+
+analyst = Agent(
+    role="Market Research Analyst",
+    goal="Produce accurate, structured market reports",
+    backstory="Senior analyst at a leading research firm.",
+)
+
+task = Task(
+    description="Analyze the AI agent platform market in 2026.",
+    expected_output="A structured market report.",
+    agent=analyst,
+    output_pydantic=MarketReport,  # Enforce structured output
+)
+
+crew = Crew(agents=[analyst], tasks=[task])
+result = crew.kickoff()
+
+# Access typed fields directly
+report = result.pydantic
+print(f"Industry: {report.industry}")
+print(f"Market Size: {report.market_size}")
+print(f"Growth: {report.growth_rate}%")
+print(f"Top Players: {', '.join(report.top_players)}")`,
+      runCommand: 'python crewai_05_structured.py',
+    },
+    {
+      id: 'crewai-flows',
+      number: 'CR6',
+      title: 'Multi-Crew Flows & Pipelines',
+      file: 'crewai_06_flows.py',
+      category: 'advanced',
+      provider: 'crewai',
+      model: 'Any LLM',
+      icon: '🔄',
+      color: '#e63946',
+      description: 'Chain multiple crews together in a Flow — the output of one crew feeds into the next. Build complex multi-stage pipelines with conditional routing and parallel execution.',
+      concepts: ['Flow class', '@start / @listen', 'Crew chaining', 'Conditional flows'],
+      codePreview: `from crewai import Agent, Task, Crew
+from crewai.flow.flow import Flow, listen, start
+
+class ContentPipeline(Flow):
+    @start()
+    def research_phase(self):
+        """First crew: gather information."""
+        researcher = Agent(role="Researcher", goal="Gather data")
+        task = Task(
+            description=f"Research: {self.state['topic']}",
+            expected_output="Key findings.",
+            agent=researcher,
+        )
+        crew = Crew(agents=[researcher], tasks=[task])
+        result = crew.kickoff()
+        return result.raw
+
+    @listen(research_phase)
+    def writing_phase(self, research):
+        """Second crew: write content from research."""
+        writer = Agent(role="Writer", goal="Write a blog post")
+        task = Task(
+            description=f"Write a blog post using: {research}",
+            expected_output="A polished blog post.",
+            agent=writer,
+        )
+        crew = Crew(agents=[writer], tasks=[task])
+        result = crew.kickoff()
+        return result.raw
+
+    @listen(writing_phase)
+    def review_phase(self, draft):
+        """Third crew: edit and polish."""
+        editor = Agent(role="Editor", goal="Polish the draft")
+        task = Task(
+            description=f"Edit and improve: {draft}",
+            expected_output="Publication-ready article.",
+            agent=editor,
+        )
+        crew = Crew(agents=[editor], tasks=[task])
+        return crew.kickoff().raw
+
+# Run the full pipeline
+flow = ContentPipeline()
+result = flow.kickoff(inputs={"topic": "AI agents in production"})
+print(result)`,
+      runCommand: 'python crewai_06_flows.py',
+    },
   ],
 };
 
@@ -1405,4 +1724,5 @@ export const providerColors = {
   llama: '#7c3aed',
   langchain: '#1c3c3c',
   langgraph: '#0f766e',
+  crewai: '#e63946',
 };
