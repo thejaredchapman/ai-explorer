@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import AiExamples from './components/AiExamples';
 import AiConcepts from './components/AiConcepts';
 import ConceptDetail from './components/ConceptDetail';
 import LlmRubric from './components/LlmRubric';
@@ -11,10 +12,12 @@ import ProductsExplorer from './components/ProductsExplorer';
 import CodeAssistants from './components/CodeAssistants';
 import AiToolsSection from './components/AiToolsSection';
 import ResourcesSection from './components/ResourcesSection';
-import GuidesSection from './components/GuidesSection';
+import GuidesSection from "./components/GuidesSection";
+import SkillsSection from "./components/SkillsSection";
+import LearningGames from "./components/LearningGames";
 import './App.css';
 
-const SECTION_IDS = ['hero', 'concepts', 'llm-rubric', 'model-training', 'prompt-engineering', 'products', 'ai-tools', 'code-assistants', 'resources', 'guides'];
+const SECTION_IDS = ['hero', 'ai-examples', 'concepts', 'llm-rubric', 'model-training', 'prompt-engineering', 'products', 'ai-tools', 'code-assistants', 'skills', 'learning-games', 'resources', 'guides'];
 
 function App() {
   const [activeConceptId, setActiveConceptId] = useState(null);
@@ -99,6 +102,7 @@ function App() {
         ) : (
           <main className="main-content" key="overview">
             <Hero onNavigate={navigateTo} />
+            <AiExamples />
             <AiConcepts onOpenDetail={openConceptDetail} />
             <LlmRubric />
             <ModelTraining />
@@ -106,6 +110,8 @@ function App() {
             <ProductsExplorer />
             <AiToolsSection />
             <CodeAssistants />
+            <SkillsSection />
+            <LearningGames />
             <ResourcesSection />
             <GuidesSection />
           </main>

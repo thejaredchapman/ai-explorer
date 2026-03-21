@@ -5,44 +5,39 @@
 
 export const quickTips = [
   {
-    title: 'Be Specific, Not Vague',
-    tip: 'Replace generic requests with precise instructions. Tell the AI exactly what format, length, tone, and audience you need. The more specific your input, the more useful the output.',
-    example: 'Instead of "Write about dogs," try "Write a 200-word paragraph about golden retrievers as family pets, aimed at first-time dog owners, in a warm and encouraging tone."',
+    title: '1. Provide Context',
+    tip: 'Give the AI the background information it needs. Be clear about the specific details, timeframe, and background of your request so it doesn\'t have to guess.',
+    example: 'Instead of "Tell me about climate change," try "Explain three major impacts of climate change on agriculture in tropical regions, with examples from the past decade."',
   },
   {
-    title: 'Give Context & Role',
-    tip: 'Set the scene by telling the AI who it should act as and what background it needs. A prompt with context produces dramatically better results than one without.',
-    example: '"You are a senior Python developer reviewing code for a junior engineer. Explain what this function does and suggest improvements for readability."',
+    title: '2. Show Examples of What "Good" Looks Like',
+    tip: 'Showing is better than telling. Providing a few examples helps the AI understand the exact pattern, style, or format you want much more clearly than just describing it.',
+    example: 'Instead of just asking for a summary, provide a sample: "Here is an example of how to convert technical jargon into plain language... Now, please do the same for this new statement..."',
   },
   {
-    title: 'Show, Don\'t Just Tell',
-    tip: 'Include examples of what you want. One concrete example is worth a hundred words of description. If you want a specific format, show a sample of that format.',
-    example: 'Format each item like this:\n- **Term**: Definition (one sentence)\n\nNow do the same for: API, SDK, REST',
+    title: '3. Specify Output Constraints',
+    tip: 'Tell the AI exactly how you want the final answer formatted. Whether you want a list, specific sections, or a certain color palette, giving constraints makes the result immediately usable.',
+    example: 'Instead of "Design a website," try "Create a modern single-page website with these specific sections: Hero, About, and Contact. Make the menu sticky and use a sunset color palette."',
   },
   {
-    title: 'Break Down Complex Tasks',
-    tip: 'Don\'t ask for everything at once. Split big tasks into sequential steps. Ask the AI to think through each part, then combine. This avoids overwhelm and increases accuracy.',
-    example: '"First, outline the main sections. Then write each section one at a time. Finally, review the full document for consistency."',
+    title: '4. Break Complex Tasks into Steps',
+    tip: 'Don\'t ask for everything all at once. Breaking down a large request into a numbered list of clear, smaller steps helps guide the AI to give a much more thorough and methodical response.',
+    example: '"Please analyze this sales data by taking these steps: 1. Identify top products, 2. Compare to the previous quarter, 3. Highlight trends, and 4. Suggest reasons for these trends."',
   },
   {
-    title: 'Iterate and Refine',
-    tip: 'Your first prompt rarely produces the best result. Treat prompting as a conversation — refine, add constraints, ask for changes. Each iteration gets closer to what you need.',
-    example: '"That\'s good, but make the tone more professional and add a bullet-point summary at the end."',
+    title: '5. Ask It to Think First',
+    tip: 'Give the AI space to "think" before it gives you the final answer. Asking it to carefully consider the factors and constraints beforehand leads to much better, more thoughtful results.',
+    example: '"Before answering, please think through this problem carefully. Consider the different factors, potential constraints, and various approaches before recommending the best solution."',
   },
   {
-    title: 'Specify What to Avoid',
-    tip: 'Tell the AI what you don\'t want. Negative constraints are just as useful as positive ones. This prevents common pitfalls like jargon, filler, or off-topic tangents.',
-    example: '"Explain quantum computing to a 10-year-old. Avoid technical jargon, math notation, and analogies involving cats."',
+    title: '6. Define the AI\'s Role',
+    tip: 'Tell the AI who to act as. Giving it a specific role or persona helps tailor its tone, style, and vocabulary to perfectly match your needs and your intended audience.',
+    example: '"Please explain how rainbows form from the perspective of an experienced science teacher speaking to a bright 10-year-old who is interested in science."',
   },
   {
-    title: 'Use Delimiters for Structure',
-    tip: 'Use triple quotes, XML tags, or markdown headers to clearly separate instructions from content. This helps the AI distinguish between what to do and what to do it with.',
-    example: 'Summarize the following article:\n\n"""[paste article here]"""\n\nProvide the summary as 3 bullet points.',
-  },
-  {
-    title: 'Ask for Step-by-Step Reasoning',
-    tip: 'When accuracy matters, ask the AI to show its work. Phrases like "think step by step" or "explain your reasoning" dramatically improve results on logic, math, and analysis tasks.',
-    example: '"Solve this problem step by step, showing your reasoning at each stage before giving the final answer."',
+    title: 'Secret Weapon: Ask the AI for Help',
+    tip: 'When you aren\'t sure how to ask for something, let the AI help you write the prompt! It\'s an incredibly powerful way to figure out the right words for complex tasks.',
+    example: '"I\'m trying to get you to help me with [my goal]. I\'m not sure how to phrase my request to get the best results. Can you help me craft an effective prompt for this?"',
   },
 ];
 

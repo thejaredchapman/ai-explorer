@@ -6,6 +6,7 @@ export default function Navigation({ currentSection, onNavigate, theme, onToggle
 
   const sections = [
     { id: 'hero', label: 'Home' },
+    { id: 'ai-examples', label: 'Examples' },
     { id: 'concepts', label: 'AI Concepts' },
     { id: 'llm-rubric', label: 'LLM Rubric' },
     { id: 'model-training', label: 'Training' },
@@ -13,6 +14,8 @@ export default function Navigation({ currentSection, onNavigate, theme, onToggle
     { id: 'products', label: 'Products' },
     { id: 'ai-tools', label: 'Tools & Protocols' },
     { id: 'code-assistants', label: 'Code Editors' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'learning-games', label: 'Games' },
     { id: 'resources', label: 'Resources' },
     { id: 'guides', label: 'Guides' },
   ];

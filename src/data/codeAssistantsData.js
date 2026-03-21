@@ -4,6 +4,28 @@
 
 export const codeAssistants = [
   {
+    id: 'qodo',
+    name: 'Qodo',
+    provider: 'Qodo',
+    icon: '🛡️',
+    color: '#0284c7',
+    type: 'Code Review & Quality',
+    pricing: 'Free / $19/mo Pro',
+    models: ['Custom models', 'GPT-5.2', 'Claude Sonnet 4.6'],
+    description: 'Positioned as an AI Code Review Platform, Qodo acts as a "quality layer" in the AI development stack. It focuses on writing tests, analyzing code for bugs, and ensuring enterprise-grade code quality before merging.',
+    bestFor: 'Engineering teams focused on code quality, automated test generation, and deep AI-driven code reviews.',
+    keyFeatures: [
+      'Deep AI code reviews and PR analysis',
+      'Automated test generation and execution',
+      'Acts as a quality layer for AI-generated code',
+      'Integrates directly into CI/CD pipelines',
+      'Enterprise security and privacy controls',
+    ],
+    supported: ['VS Code', 'JetBrains', 'GitHub', 'GitLab'],
+    learnMore: 'https://qodo.ai',
+    category: 'extension',
+  },
+  {
     id: 'github-copilot',
     name: 'GitHub Copilot',
     provider: 'GitHub / Microsoft',
@@ -35,7 +57,7 @@ export const codeAssistants = [
     type: 'AI-Native IDE',
     pricing: 'Free / $20/mo Pro',
     models: ['Claude Sonnet 4.6', 'GPT-5.2', 'Cursor-small'],
-    description: 'A VS Code fork rebuilt from the ground up for AI-assisted development. Features deep codebase understanding, multi-file edits, and an agent mode that can autonomously execute tasks across your project.',
+    description: 'A VS Code fork rebuilt from the ground up for AI-assisted development. Features deep codebase understanding, multi-file edits, and an agent mode ("self-driving codebases") that can autonomously execute tasks across your project.',
     bestFor: 'Developers who want the most integrated AI coding experience with multi-file editing and autonomous agent capabilities.',
     keyFeatures: [
       'Codebase-wide context with @-mentions',

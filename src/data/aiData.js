@@ -1346,11 +1346,11 @@ export const aiProducts = [
   {
     id: 'anthropic',
     company: 'Anthropic',
-    products: 'Claude (Opus, Sonnet, Haiku)',
+    products: 'Claude (Opus, Sonnet, Haiku), Claude Cowork',
     logo: '🟤',
     color: '#d4a27f',
-    type: 'LLM · Coding Assistant',
-    brief: 'Builds Claude — an AI assistant emphasizing safety, nuanced reasoning, and long-context understanding. Offers Claude Code for developers and enterprise integrations.',
+    type: 'LLM · Coding Assistant · AI Agents',
+    brief: 'Builds Claude — an AI assistant emphasizing safety, nuanced reasoning, and long-context understanding. Offers Claude Code for developers and Claude Cowork as an autonomous "AI intern" for enterprise tasks.',
     userTypes: ['developer', 'enterprise', 'researcher'],
     transformation: {
       developer: 'Use Claude Code to generate, debug, and refactor entire codebases — handling complex multi-file changes that would take hours in minutes.',
@@ -1361,16 +1361,17 @@ export const aiProducts = [
   {
     id: 'google',
     company: 'Google',
-    products: 'Gemini, Vertex AI',
+    products: 'Gemini, Vertex AI, NotebookLM',
     logo: '🔵',
     color: '#4285f4',
-    type: 'Multimodal LLM · Cloud AI Platform',
-    brief: 'Google DeepMind\'s Gemini is a natively multimodal model processing text, images, video, and code. Vertex AI is the enterprise ML platform for deploying AI at scale.',
-    userTypes: ['data-scientist', 'developer', 'enterprise'],
+    type: 'Multimodal LLM · Cloud AI Platform · Research',
+    brief: 'Google DeepMind\'s Gemini is a natively multimodal model processing text, images, video, and code. Vertex AI is the enterprise ML platform. NotebookLM acts as a grounded research expert on user-uploaded data.',
+    userTypes: ['data-scientist', 'developer', 'enterprise', 'researcher'],
     transformation: {
       'data-scientist': 'Analyze mixed datasets of text, charts, and images simultaneously through Vertex AI, reducing model deployment time from months to days.',
       developer: 'Build multimodal applications that understand text, images, and code together using Gemini\'s unified API.',
       enterprise: 'Deploy managed AI solutions at Google-scale with Vertex AI\'s end-to-end MLOps pipeline and governance.',
+      researcher: 'Upload dozens of PDFs to NotebookLM to create a personalized, cited AI expert capable of synthesizing complex research.',
     },
   },
   {
@@ -1466,11 +1467,11 @@ export const aiProducts = [
   {
     id: 'perplexity',
     company: 'Perplexity',
-    products: 'Perplexity AI Search',
+    products: 'Perplexity AI Search, Spaces',
     logo: '🔍',
     color: '#20808d',
-    type: 'AI-Powered Search Engine',
-    brief: 'An AI answer engine that combines LLMs with real-time web search — providing direct, sourced answers instead of link lists. Cites sources inline for verification.',
+    type: 'AI-Powered Search & Knowledge',
+    brief: 'An AI answer engine that combines LLMs with real-time web search. In 2026, introduced "Spaces" for building persistent, topically organized knowledge bases that the AI constantly updates with verified, cited information.',
     userTypes: ['researcher', 'enterprise', 'marketer'],
     transformation: {
       researcher: 'Synthesize information across dozens of sources in seconds — getting comprehensive, cited summaries instead of manually reading articles.',
